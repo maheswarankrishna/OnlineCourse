@@ -6,6 +6,7 @@ import Home from "./sreens/Home";
 
 import LoginScreen from "./sreens/LoginScreen";
 import RegisterScreen from "./sreens/RegisterScreen";
+import Course from "./sreens/student/Course";
 
 import Courses from "./sreens/student/Courses";
 
@@ -23,6 +24,7 @@ function App() {
         {/* <Route exact path="/quizes"   render={(props) => <Home {...props} />} /> */}
         {/* <Route exact path="/results"   render={(props) => <Home {...props} />} /> */}
         <Route exact path="/courses" component={Courses} />
+        <Route exact path="/course" render={(props) => <Course {...props} />} />
         {/* <Route exact path="/mycourses" component={Courses} /> */}
       </Switch>
 

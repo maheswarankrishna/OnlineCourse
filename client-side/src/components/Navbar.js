@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 export default function Navigationbar(props) {
@@ -13,7 +13,7 @@ export default function Navigationbar(props) {
 
   return (
     <>
-      <Navbar bg="white" expand="lg" sticky="top" style={{border:'1px solid red'}}>
+      <Navbar bg="white" expand="lg" sticky="top">
         <Navbar.Brand href="/home">Online Certificate</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

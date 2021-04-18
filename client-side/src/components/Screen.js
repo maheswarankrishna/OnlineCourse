@@ -16,7 +16,7 @@ export default function Screen({ children, title, subtitle, navbar=true }) {
     <div>
       {navbar && <Navigationbar />}
       <Container
-        style={{ backgroundColor: 'white', padding: 15, marginTop: 20 }}
+        style={{ backgroundColor: 'white', padding: 15, marginTop: 15 }}
       >
         <div style={{ sticky: 'top' , display:'inline-block'}}>
           {title && <><h1>{title}</h1></>}

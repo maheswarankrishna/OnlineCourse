@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Screen from "../../components/Screen";
 import CourseGrid from "../../components/course/CourseGrid";
 import CourseCard from "../../components/course/CourseCard";
 
 function Courses(props) {
-  const [courses, setCourses] = useState();
+  // const [courses, setCourses] = useState();
 
   const courseArray = [
     {
