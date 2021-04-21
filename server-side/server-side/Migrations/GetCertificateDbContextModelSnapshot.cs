@@ -39,6 +39,24 @@ namespace server_side.Migrations
                     b.ToTable("CourseTypes");
                 });
 
+            modelBuilder.Entity("server_side.Models.CourseVideos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CourseVideos");
+                });
+
             modelBuilder.Entity("server_side.Models.Courses", b =>
                 {
                     b.Property<int>("Id")
