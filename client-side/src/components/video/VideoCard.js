@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import { Media } from "react-bootstrap";
 
 import VideoHolder from "../../assets/video-icon.png";
+import VideoView from "./VideoView";
 
-function VideoCard({ name, description, seen }) {
+
+function VideoCard({ name, description, seen, onClick, show, hide }) {
+  const[modal, setModal] = useState(false);
+
   return (
     <>
-      <Media style={{border:'1px solid #D9DDDC', marginTop:5}}>
+      <Media style={{border:'1px solid #D9DDDC', marginTop:5}} onClick={()=>setModal(true)}>
         <img
           width={80}
           height={80}
@@ -14,6 +18,7 @@ function VideoCard({ name, description, seen }) {
           src={VideoHolder}
           alt="Video placeholder"
         />
+        
         <Media.Body style={{alignItems:'center', marginTop:'auto'}}>
           <h6>
             {name}
@@ -24,6 +29,8 @@ function VideoCard({ name, description, seen }) {
           <p>{description}</p>
         </Media.Body>
       </Media>
+
+      <VideoView show={modal} hide={()=>setModal(false)} name={name}/>
     </>
   );
 }
