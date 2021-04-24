@@ -20,7 +20,9 @@ namespace server_side.Repository
             var CourseVideos = new CourseVideos()
             {
                 FileName = videos.FileName,
-                FilePath = path
+                FilePath = path,
+                VideoDescription = videos.Description,
+                CourseId = videos.CourseId
             };
 
             _dbContext.CourseVideos.Add(CourseVideos);

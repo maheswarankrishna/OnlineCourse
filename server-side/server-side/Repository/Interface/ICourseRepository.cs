@@ -8,7 +8,7 @@ namespace server_side.Repository
 {
     public interface ICourseRepository
     {
-        Task<Courses> GetCoursesById(int Id);
+        Task<List<Courses>> GetCoursesById(int Id);
         Task<List<Courses>> GetAllCourses();
         Task<Courses> UpdateCourse(Courses course);
         Task<Courses> CreateCourse(Courses course);

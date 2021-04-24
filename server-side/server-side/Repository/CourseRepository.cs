@@ -1,4 +1,6 @@
-﻿using server_side.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using server_side.Dtos;
+using server_side.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,23 +18,40 @@ namespace server_side.Repository
 
         public async Task<Courses> CreateCourse(Courses course)
         {
-            var courses = _dbContext.Courses.Add(course);
+            var courses = await _dbContext.Courses.AddAsync(course);
             _dbContext.SaveChanges();
             return course;
         }
 
         public async Task<List<Courses>> GetAllCourses()
         {
-            var result = _dbContext.Courses.ToList();
+            var result = await _dbContext.Courses.ToListAsync();
 
             return result;
         }
 
-        public async Task<Courses> GetCoursesById(int Id)
+        public async Task<List<Courses>> GetCoursesById(int Id)
         {
-            var result =  _dbContext.Courses.FirstOrDefault(e => e.Id == Id);
+            var result =  _dbContext.Courses.Include(e => e.Videos).Where(e => e.Id == Id).AsQueryable();
+            //var resultCourses = _dbContext.CourseVideos.GetAll
+            var results = await result.ToListAsync();
 
-            return result;
+            //var courseVideo = new CourseVideosDto();
+
+            //var coursesDto = new CoursesDto()
+            //{
+            //    Id = result.Id,
+            //    CourseName = result.CourseName,
+            //    Description = result.Description,
+            //    CourseTypeId = result.CourseTypeId,
+            //    courseVideosDto = new List<CourseVideosDto>()
+            //    {
+            //       courseVideosDto.
+            //    }
+            //}
+            //var res = _dbContext.Courses
+            //.Include("Employee.Employee_Car")
+            return results;
         }
 
         public async Task<Courses> UpdateCourse(Courses course)

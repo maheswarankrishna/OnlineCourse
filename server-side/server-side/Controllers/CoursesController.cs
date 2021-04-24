@@ -19,7 +19,7 @@ namespace server_side.Controllers
         {
             _coursesRepository = coursesRepository;
         }
-        // GET: api/<Courses1Controller>
+        // GET: api/<CoursesController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -27,7 +27,7 @@ namespace server_side.Controllers
             return Ok(coures);
         }
 
-        // GET api/<Courses1Controller>/5
+        // GET api/<CoursesController>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -35,7 +35,7 @@ namespace server_side.Controllers
             return Ok(course);
         }
 
-        // POST api/<Courses1Controller>
+        // POST api/<CoursesController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Courses courses)
         {
@@ -43,7 +43,7 @@ namespace server_side.Controllers
             return Ok(result);
         }
 
-        // PUT api/<Courses1Controller>/5
+        // PUT api/<CoursesController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Courses courses)
         {

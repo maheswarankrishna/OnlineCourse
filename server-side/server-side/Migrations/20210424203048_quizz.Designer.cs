@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using server_side.Repository;
 
 namespace server_side.Migrations
 {
     [DbContext(typeof(GetCertificateDbContext))]
-    partial class GetCertificateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210424203048_quizz")]
+    partial class quizz
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
