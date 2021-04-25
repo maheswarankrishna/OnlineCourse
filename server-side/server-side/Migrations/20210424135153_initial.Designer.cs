@@ -9,7 +9,7 @@ using server_side.Repository;
 namespace server_side.Migrations
 {
     [DbContext(typeof(GetCertificateDbContext))]
-    [Migration("20210414102750_initial")]
+    [Migration("20210424135153_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,32 @@ namespace server_side.Migrations
                     b.ToTable("CourseTypes");
                 });
 
+            modelBuilder.Entity("server_side.Models.CourseVideos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VideoDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("CourseVideos");
+                });
+
             modelBuilder.Entity("server_side.Models.Courses", b =>
                 {
                     b.Property<int>("Id")
@@ -64,15 +90,36 @@ namespace server_side.Migrations
                     b.ToTable("Courses");
                 });
 
+            modelBuilder.Entity("server_side.Models.CourseVideos", b =>
+                {
+                    b.HasOne("server_side.Models.Courses", "Courses")
+                        .WithMany("Videos")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Courses");
+                });
+
             modelBuilder.Entity("server_side.Models.Courses", b =>
                 {
                     b.HasOne("server_side.Models.CourseType", "CourseType")
-                        .WithMany()
+                        .WithMany("courses")
                         .HasForeignKey("CourseTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CourseType");
+                });
+
+            modelBuilder.Entity("server_side.Models.CourseType", b =>
+                {
+                    b.Navigation("courses");
+                });
+
+            modelBuilder.Entity("server_side.Models.Courses", b =>
+                {
+                    b.Navigation("Videos");
                 });
 #pragma warning restore 612, 618
         }

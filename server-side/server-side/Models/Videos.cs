@@ -10,6 +10,8 @@ namespace server_side.Models
     {        
         public string FileName { get; set; }
         public IFormFile FormFiles { get; set; }
-        
+        public string Description { get; set; }
+        public int CourseId { get; set; }
+
     }
 }
