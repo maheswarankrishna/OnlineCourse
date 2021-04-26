@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using server_side.Dtos;
 using server_side.Models;
 using server_side.Repository;
 
@@ -21,15 +22,16 @@ namespace server_side.Controllers
         }
         // GET: api/<CoursesController>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetAllCourses()
         {
             var coures = await _coursesRepository.GetAllCourses();
+
             return Ok(coures);
         }
 
         // GET api/<CoursesController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> GetCourseById(int id)
         {
             var course = await _coursesRepository.GetCoursesById(id);
             return Ok(course);
@@ -37,7 +39,7 @@ namespace server_side.Controllers
 
         // POST api/<CoursesController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Courses courses)
+        public async Task<IActionResult> CreateCourse([FromBody] CourseCreateModel courses)
         {
             var result = await _coursesRepository.CreateCourse(courses);
             return Ok(result);

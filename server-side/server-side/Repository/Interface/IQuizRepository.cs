@@ -9,7 +9,7 @@ namespace server_side.Repository.Interface
 {
     public interface IQuizRepository
     {
-        Task<Quiz> GetQuizById(int Id);
+        Task<QuizDto> GetQuizById(int Id);
         Task<List<Quiz>> GetAllQuizzes();
         Task<Quiz> UpdateQuiz(Courses course);
         Task<QuizDto> CreateQuiz(QuizDto quiz);

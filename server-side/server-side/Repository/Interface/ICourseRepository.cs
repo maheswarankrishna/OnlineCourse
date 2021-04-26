@@ -1,4 +1,5 @@
-﻿using server_side.Models;
+﻿using server_side.Dtos;
+using server_side.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ namespace server_side.Repository
 {
     public interface ICourseRepository
     {
-        Task<List<Courses>> GetCoursesById(int Id);
-        Task<List<Courses>> GetAllCourses();
+        Task<CoursesDto> GetCoursesById(int Id);
+        Task<List<CourseModel>> GetAllCourses();
         Task<Courses> UpdateCourse(Courses course);
-        Task<Courses> CreateCourse(Courses course);
+        Task<Courses> CreateCourse(CourseCreateModel course);
     }
 }

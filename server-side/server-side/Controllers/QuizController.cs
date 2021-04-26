@@ -21,23 +21,23 @@ namespace server_side.Controllers
             _quizRepository = quizRepository;
         }
 
-        // GET: api/<QuizController>
-        //[HttpGet]
-        //public async Task<IActionResult> Get()
-        //{
-        //    var coures = await _coursesRepository.GetAllCourses();
-        //    return Ok(coures);
-        //}
+        //GET: api/<QuizController>
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var quizzes = await _quizRepository.GetAllQuizzes();
+            return Ok(quizzes);
+        }
 
-        //// GET api/<QuizController>/5
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> Get(int id)
-        //{
-        //    var course = await _coursesRepository.GetCoursesById(id);
-        //    return Ok(course);
-        //}
+        // GET api/<QuizController>/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var quiz = await _quizRepository.GetQuizById(id);
+            return Ok(quiz);
+        }
 
-        // POST api/<QuizController>
+        //POST api/<QuizController>
         [HttpPost]
         public async Task<IActionResult> CreateQuiz([FromBody] QuizDto quizz)
         {

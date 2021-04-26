@@ -18,6 +18,13 @@ namespace server_side.Mapper
                 .ForMember(x => x.Courses, opt => opt.Ignore());
             CreateMap<QuizQuestions, QuizQuestionsDto >().ReverseMap()
                 .ForMember(x => x.Quiz, opt => opt.Ignore());
+            CreateMap<Courses, CoursesDto>().ReverseMap();
+            CreateMap<CourseVideos, CourseVideosDto>().ReverseMap();
+            ////CreateMap<Courses, CoursesDto>()
+            ////   .Include<Videos, CourseVideosDto>();
+            CreateMap<CourseVideos, CourseVideosDto>();
+            //CreateMap<Courses, CoursesDto>()
+            //    .Include<CourseVideos, CourseVideosDto>();
         }
     }
 }

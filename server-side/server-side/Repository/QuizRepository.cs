@@ -35,10 +35,11 @@ namespace server_side.Repository
             return result;
         }
 
-        public async Task<Quiz> GetQuizById(int Id)
+        public async Task<QuizDto> GetQuizById(int Id)
         {
             var result =  _dbContext.Quizzes.Include(e => e.QuizQuestions).FirstOrDefault(e => e.Id == Id);
-            return result;
+            var quizzDto = _mapper.Map<QuizDto>(result);
+            return quizzDto;
         }
 
         public Task<Quiz> UpdateQuiz(Courses course)
