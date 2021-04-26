@@ -13,6 +13,7 @@ import Courses from "./sreens/student/CoursesScreen";
 
 import MyCoursesScreen from "./sreens/teacher/MyCoursesScreen";
 import MyCourseScreen from "./sreens/teacher/MyCourseScreen";
+import AddCourseScreen from "./sreens/teacher/AddCourseScreen";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         {/* Teacher Paths */}
         <Route exact path="/teacher/courses" render={(props) => <MyCoursesScreen {...props} />} />
         <Route exact path="/teacher/course" render={(props) => <MyCourseScreen {...props} />} />
+        <Route exact path="/teacher/addCourse" render={(props) => <AddCourseScreen {...props} />} />
 
         {/* Admin Paths */}
         <Route exact path="/admin/approval" render={(props) => <ApprovalScreen {...props} />} />

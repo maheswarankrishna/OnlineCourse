@@ -35,7 +35,7 @@ export default function FormInput({
               {as !== 'select'
                 ? null
                 : options.map((option) => (
-                    <option key={option}>{option}</option>
+                    <option key={option.id}>{option.name}</option>
                   ))}
             </Form.Control>
           </>
