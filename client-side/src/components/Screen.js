@@ -20,7 +20,7 @@ export default function Screen({ children, title, subtitle, navbar=true }) {
       >
         <div style={{ sticky: 'top' , display:'inline-block'}}>
           {title && <><h1>{title}</h1></>}
-          {subtitle && <><h2>{subtitle}</h2></>}
+          {subtitle && <><h3 className='text-muted'>{subtitle}</h3></>}
         </div>
         <div>{children}</div>
       </Container>

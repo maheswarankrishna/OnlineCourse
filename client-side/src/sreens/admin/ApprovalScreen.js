@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 
 import Screen from "../../components/Screen";
 import Row from "../../components/table/Row";

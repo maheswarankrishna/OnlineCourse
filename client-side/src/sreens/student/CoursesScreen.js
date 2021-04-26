@@ -32,6 +32,12 @@ function Courses(props) {
       subtitle: "Steps to Pro I",
       description: "A step by step process to do Pro I  ...",
     },
+    {
+      id: 5,
+      title: "Pro II",
+      subtitle: "Steps to Pro II",
+      description: "A step by step process to do Pro II  ...",
+    },
   ];
 
   return (

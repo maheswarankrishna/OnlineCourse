@@ -7,9 +7,12 @@ import Home from "./sreens/Home";
 
 import LoginScreen from "./sreens/LoginScreen";
 import RegisterScreen from "./sreens/RegisterScreen";
-import Course from "./sreens/student/CourseScreen";
 
+import Course from "./sreens/student/CourseScreen";
 import Courses from "./sreens/student/CoursesScreen";
+
+import MyCoursesScreen from "./sreens/teacher/MyCoursesScreen";
+import MyCourseScreen from "./sreens/teacher/MyCourseScreen";
 
 function App() {
   return (
@@ -27,7 +30,10 @@ function App() {
         <Route exact path="/courses" component={Courses} />
         <Route exact path="/course" render={(props) => <Course {...props} />} />
         {/* <Route exact path="/mycourses" component={Courses} /> */}
-        
+        {/* Teacher Paths */}
+        <Route exact path="/teacher/courses" render={(props) => <MyCoursesScreen {...props} />} />
+        <Route exact path="/teacher/course" render={(props) => <MyCourseScreen {...props} />} />
+
         {/* Admin Paths */}
         <Route exact path="/admin/approval" render={(props) => <ApprovalScreen {...props} />} />
       </Switch>
