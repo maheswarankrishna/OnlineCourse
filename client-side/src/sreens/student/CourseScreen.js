@@ -65,22 +65,36 @@ class Course extends Component {
     return (
       <Screen title={this.state.name}>
         {/* TODO: Category must be included */}
-        <Row style={{marginTop:20}}>
-          
+        <Row style={{ marginTop: 20 }}>
           {/* Course Videos */}
           <Col sm={8}>
-            <div style={{width: "100%", padding:10 }}>
-              <h2>Videos</h2><hr/>
-              {this.state.videos.map(({id, name, description, seen})=>  <VideoCard key={id} name={name} description={description} seen={seen}/>)}
-             
+            <div style={{ width: "100%", padding: 10 }}>
+              <h2>Videos</h2>
+              <hr />
+              {this.state.videos.map(({ id, name, description, seen }) => (
+                <VideoCard
+                  key={id}
+                  name={name}
+                  description={description}
+                  seen={seen}
+                />
+              ))}
             </div>
           </Col>
 
           {/* Course Quizes */}
           <Col sm={4}>
-            <div style={{width: "100%", padding:10 }}>
-              <h2>Quizes</h2><hr/>
-              {this.state.quizes.map(({id, name, description, attempted})=>  <QuizCard key={id} name={name} description={description} attempted={attempted}/>)}
+            <div style={{ width: "100%", padding: 10 }}>
+              <h2>Quizes</h2>
+              <hr />
+              {this.state.quizes.map(({ id, name, description, attempted }) => (
+                <QuizCard
+                  key={id}
+                  name={name}
+                  description={description}
+                  attempted={attempted}
+                />
+              ))}
             </div>
           </Col>
         </Row>
