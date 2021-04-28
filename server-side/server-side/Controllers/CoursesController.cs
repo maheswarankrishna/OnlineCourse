@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amazon.S3;
+using Amazon.S3.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using server_side.Dtos;
@@ -15,10 +17,12 @@ namespace server_side.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly ICourseRepository _coursesRepository;
+        private readonly IAmazonS3 _amazonS3;
 
-        public CoursesController(ICourseRepository coursesRepository)
+        public CoursesController(ICourseRepository coursesRepository, IAmazonS3 amazonS3)
         {
             _coursesRepository = coursesRepository;
+            _amazonS3 = amazonS3;
         }
         // GET: api/<CoursesController>
         [HttpGet]
@@ -41,6 +45,13 @@ namespace server_side.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCourse([FromBody] CourseCreateModel courses)
         {
+            string prefix = "";
+            PutObjectRequest putobjectRequest = new PutObjectRequest();
+            putobjectRequest.BucketName = "onlinecourseswithvideos";
+            putobjectRequest.Key = (prefix.TrimEnd('/') + "/" + courses.CourseName.TrimEnd('/') + "/").TrimStart('/');
+            //putobjectRequest.InputStream = 
+            var response = await _amazonS3.PutObjectAsync(putobjectRequest);
+            var res = response.HttpStatusCode;
             var result = await _coursesRepository.CreateCourse(courses);
             return Ok(result);
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amazon.S3;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,7 +32,13 @@ namespace server_side
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddControllers();
-            services.AddControllers().AddNewtonsoftJson();
+            //services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
+            services.AddAWSService<IAmazonS3>();
 
             services.AddSwaggerGen(c =>
             {
@@ -59,6 +66,15 @@ namespace server_side
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+            //services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +86,10 @@ namespace server_side
             }
 
             app.UseRouting();
+
+            // app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
@@ -87,6 +107,8 @@ namespace server_side
             {
                 endpoints.MapControllers();
             });
+
+            
         }
     }
 }

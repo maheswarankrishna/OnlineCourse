@@ -10,5 +10,6 @@ namespace server_side.Dtos
         public string CourseName { get; set; }
         public string Description { get; set; }
         public int CourseType { get; set; }
+        public TeacherProfileDto TeacherProfile { get; set; }
     }
 }

@@ -26,7 +26,13 @@ namespace server_side.Repository
             {
                 CourseName = courseCreateModel.CourseName,
                 Description = courseCreateModel.Description,
-                CourseTypeId = courseCreateModel.CourseType
+                CourseTypeId = courseCreateModel.CourseType,
+                Teacher = new TeacherProfile
+                {
+                    TeacherId = courseCreateModel.TeacherProfile.TeacherId,
+                    CourseId = courseCreateModel.TeacherProfile.CourseId
+                }
+                
             };
 
             var courses = await _dbContext.Courses.AddAsync(course);

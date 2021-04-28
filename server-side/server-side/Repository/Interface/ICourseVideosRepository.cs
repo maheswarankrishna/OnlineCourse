@@ -9,5 +9,6 @@ namespace server_side.Repository.Interface
     public interface ICourseVideosRepository
     {
         Task<CourseVideos> UploadVideoForCourse(Videos videos, string path);
+        //Task<CourseVideos> GetCourseName(int id);
     }
 }

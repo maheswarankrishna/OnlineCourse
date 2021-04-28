@@ -68,6 +68,9 @@ C:\Users\Shageerthana\Desktop\Projects\OnlineCourse\server-side\server-side\bin\
 C:\Users\Shageerthana\Desktop\Projects\OnlineCourse\server-side\server-side\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Shageerthana\Desktop\Projects\OnlineCourse\server-side\server-side\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Shageerthana\Desktop\Projects\OnlineCourse\server-side\server-side\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Shageerthana\Desktop\Projects\OnlineCourse\server-side\server-side\bin\Debug\netcoreapp3.1\AWSSDK.Core.dll
+C:\Users\Shageerthana\Desktop\Projects\OnlineCourse\server-side\server-side\bin\Debug\netcoreapp3.1\AWSSDK.Extensions.NETCore.Setup.dll
+C:\Users\Shageerthana\Desktop\Projects\OnlineCourse\server-side\server-side\bin\Debug\netcoreapp3.1\AWSSDK.S3.dll
 C:\Users\Shageerthana\Desktop\Projects\OnlineCourse\server-side\server-side\obj\Debug\netcoreapp3.1\server-side.csproj.CoreCompileInputs.cache
 C:\Users\Shageerthana\Desktop\Projects\OnlineCourse\server-side\server-side\obj\Debug\netcoreapp3.1\server-side.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Shageerthana\Desktop\Projects\OnlineCourse\server-side\server-side\obj\Debug\netcoreapp3.1\server-side.MvcApplicationPartsAssemblyInfo.cache

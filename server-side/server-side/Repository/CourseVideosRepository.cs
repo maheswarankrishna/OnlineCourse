@@ -15,6 +15,13 @@ namespace server_side.Repository
             _dbContext = dbContext;
         }
 
+        //public Task<CourseVideos> GetCourseName(int id)
+        //{
+        //   var courseName = _dbContext.Courses.FirstOrDefault(p => p.Id == id);
+
+        //    return courseName;
+        //}
+
         public async Task<CourseVideos> UploadVideoForCourse(Videos videos, string path)
         {
             var CourseVideos = new CourseVideos()

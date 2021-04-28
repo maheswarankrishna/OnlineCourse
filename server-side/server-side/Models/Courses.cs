@@ -15,7 +15,8 @@ namespace server_side.Models
         public int CourseTypeId { get; set; }
         [ForeignKey("CourseTypeId")]
         public CourseType CourseType { get; set; }
-               
+        public virtual TeacherProfile Teacher { get; set; }
+
         public virtual List<CourseVideos> Videos { get; set; }
         public virtual List<Quiz> Quiz { get; set; }
 
