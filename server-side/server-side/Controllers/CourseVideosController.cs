@@ -12,6 +12,7 @@ using server_side.Repository.Interface;
 using Microsoft.Extensions.Configuration;
 using Amazon.Runtime;
 using Amazon.S3.Transfer;
+using Microsoft.Extensions.Options;
 
 namespace server_side.Controllers
 {
@@ -21,19 +22,18 @@ namespace server_side.Controllers
     {
         private readonly ICourseVideosRepository _courseVideosRepository;
         private readonly IAmazonS3 _amazonS3;
-        private readonly IConfiguration _configuration;
-        public CourseVideosController(ICourseVideosRepository courseVideosRepository, IAmazonS3 amazonS3, IConfiguration configuration)
+        
+        public CourseVideosController(ICourseVideosRepository courseVideosRepository, IAmazonS3 amazonS3)
         {
             _courseVideosRepository = courseVideosRepository;
-            _amazonS3 = amazonS3;
-            _configuration = configuration;
+            _amazonS3 = amazonS3;            
         }
         [HttpPost]
         public async Task<IActionResult> UploadVideos([FromForm] Videos videoModel)
         {
             try
             {
-                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", videoModel.FileName);
+                
 
                 //using(Stream stream = new FileStream(path, FileMode.Create))
                 //{
@@ -83,13 +83,21 @@ namespace server_side.Controllers
                 //var fileTransferUtility = new TransferUtility(client);
                 //await fileTransferUtility.UploadAsync(uploadRequest);
 
+                var courseName =await _courseVideosRepository.GetCourseName(videoModel.CourseId);                                
+                var bucketName = "onlinecourseswithvideos";
+
+                string path = Path.Combine("https://onlinecourseswithvideos.s3.ap-south-1.amazonaws.com/", courseName, videoModel.FileName);
+
+
+            https://onlinecourseswithvideos.s3.ap-south-1.amazonaws.com/
+
                 await using var newMemoryStream = new MemoryStream();
                 videoModel.FormFiles.CopyTo(newMemoryStream);
 
 
-                string prefix = "Myfirstcoursenewcheck";
+                string prefix = courseName;
                 PutObjectRequest putobjectRequest = new PutObjectRequest();
-                putobjectRequest.BucketName = "onlinecourseswithvideos";
+                putobjectRequest.BucketName = bucketName;
                 putobjectRequest.Key = (prefix.TrimEnd('/') + "/" + videoModel.FileName.TrimEnd('/')).TrimStart('/');
                 putobjectRequest.InputStream = newMemoryStream;
                 var response = await _amazonS3.PutObjectAsync(putobjectRequest);
@@ -108,12 +116,13 @@ namespace server_side.Controllers
             
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetVideoById(int id)
-        //{
-        //    var course = await _coursesRepository.GetCoursesById(id);
-        //    return Ok(course);
-        //}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetVideoById(int id)
+        {
+            var bucketName = "onlinecourseswithvideos";
+            var course = await _courseVideosRepository.GetCoursesById(id);            
+            return Ok(course.FilePath);
+        }
 
 
     }

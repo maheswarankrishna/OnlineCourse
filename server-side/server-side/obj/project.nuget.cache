@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Ph/QYvnq4iNrzOmSILxn6dwOiof4TNHmbdfNVIeanJe9fF4LYta7bqoFueg/egPQLh8EeybJUtRWDMLpWyb9vw==",
+  "dgSpecHash": "KUGXOn3//PFjH4dIuEw7/KDq/+NZfe1gY+iLxYIKsZknSqzUhsItY+xPNkg/5qu80XGogF1JdhnkwWbt0eTbVw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Shageerthana\\Desktop\\Projects\\OnlineCourse\\server-side\\server-side\\server-side.csproj",
   "expectedPackageFiles": [
@@ -53,6 +53,7 @@
     "C:\\Users\\Shageerthana\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\Shageerthana\\.nuget\\packages\\swashbuckle.aspnetcore\\6.0.0\\swashbuckle.aspnetcore.6.0.0.nupkg.sha512",
+    "C:\\Users\\Shageerthana\\.nuget\\packages\\swashbuckle.aspnetcore.newtonsoft\\6.0.0\\swashbuckle.aspnetcore.newtonsoft.6.0.0.nupkg.sha512",
     "C:\\Users\\Shageerthana\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.0.0\\swashbuckle.aspnetcore.swagger.6.0.0.nupkg.sha512",
     "C:\\Users\\Shageerthana\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.0.0\\swashbuckle.aspnetcore.swaggergen.6.0.0.nupkg.sha512",
     "C:\\Users\\Shageerthana\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.0.0\\swashbuckle.aspnetcore.swaggerui.6.0.0.nupkg.sha512",

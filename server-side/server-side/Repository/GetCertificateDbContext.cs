@@ -18,5 +18,6 @@ namespace server_side.Repository
         public DbSet<CourseVideos> CourseVideos { get; set; }
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<QuizQuestions> QuizQuestions { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

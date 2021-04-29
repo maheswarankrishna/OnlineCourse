@@ -13,5 +13,6 @@ namespace server_side.Repository
         Task<List<CourseModel>> GetAllCourses();
         Task<Courses> UpdateCourse(Courses course);
         Task<Courses> CreateCourse(CourseCreateModel course);
+        Task<bool> CourseName(CourseCreateModel course);
     }
 }

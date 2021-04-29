@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using server_side.Repository;
 
 namespace server_side.Migrations
 {
     [DbContext(typeof(GetCertificateDbContext))]
-    partial class GetCertificateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210429105619_userauhentication")]
+    partial class userauhentication
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

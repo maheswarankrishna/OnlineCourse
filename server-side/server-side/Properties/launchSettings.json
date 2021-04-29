@@ -4,6 +4,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
+      "launchUrl": "/api/swagger/index.html",
       "applicationUrl": "http://localhost:64404",
       "sslPort": 0
     }
@@ -20,7 +21,7 @@
     "server_side": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "swagger/index.html",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

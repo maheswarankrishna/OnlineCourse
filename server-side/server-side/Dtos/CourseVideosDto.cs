@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using server_side.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace server_side.Dtos
         public string FileName { get; set; }
         public string FilePath { get; set; }
         public string VideoDescription { get; set; }
-        //public virtual Courses CourseId { get; set; }
+        public virtual Courses courses { get; set; }
         public int CourseId { get; set; }        
 
     }

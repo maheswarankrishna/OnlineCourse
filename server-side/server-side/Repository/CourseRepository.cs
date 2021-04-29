@@ -20,6 +20,21 @@ namespace server_side.Repository
 
         }
 
+        public async Task<bool> CourseName(CourseCreateModel course)
+        {
+            var courses = _dbContext.Courses.Select(p => p.CourseName).ToList();
+           // var courseName = if(p => courses.Contains(course.CourseName)          
+             if (courses.Contains(course.CourseName))
+             {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
         public async Task<Courses> CreateCourse(CourseCreateModel courseCreateModel)
         {
             var course = new Courses()

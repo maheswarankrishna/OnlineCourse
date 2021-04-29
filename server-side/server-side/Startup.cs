@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
 using server_side.Mapper;
 using server_side.Repository;
 using server_side.Repository.Interface;
@@ -34,17 +35,27 @@ namespace server_side
             //services.AddControllers();
             //services.AddControllers().AddNewtonsoftJson();
             services.AddControllers()
-    .AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+            .AddNewtonsoftJson(options =>
+                            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+
+                );
 
             services.AddAWSService<IAmazonS3>();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ServerSide API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ServerSide API", Version = "v1" });               
 
             });
+
+            services
+    .AddControllers()
+    .AddNewtonsoftJson(options =>
+        options.SerializerSettings.Converters.Add(new StringEnumConverter()));
+            // order is vital, this *must* be called *after* AddNewtonsoftJson()
+            services.AddSwaggerGenNewtonsoftSupport();
+
+
 
             services.AddDbContext<GetCertificateDbContext>(options =>
             {
@@ -55,6 +66,7 @@ namespace server_side
             services.AddScoped<ICoursesTypeRepository, CourseTypeRepository>();
             services.AddScoped<ICourseVideosRepository, CourseVideosRepository>();
             services.AddScoped<IQuizRepository, QuizRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
 
             
             // Auto Mapper Configurations
@@ -100,6 +112,8 @@ namespace server_side
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "CentroLink API v1");
+
+               // c.DescribeAllEnumsAsStrings();
 
             });
 

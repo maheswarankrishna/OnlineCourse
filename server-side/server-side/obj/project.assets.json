@@ -669,6 +669,19 @@
           "build/Swashbuckle.AspNetCore.props": {}
         }
       },
+      "Swashbuckle.AspNetCore.Newtonsoft/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.0.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.0.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.0/Swashbuckle.AspNetCore.Newtonsoft.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Swashbuckle.AspNetCore.Newtonsoft.dll": {}
+        }
+      },
       "Swashbuckle.AspNetCore.Swagger/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -2766,6 +2779,21 @@
         "build/Swashbuckle.AspNetCore.props",
         "swashbuckle.aspnetcore.6.0.0.nupkg.sha512",
         "swashbuckle.aspnetcore.nuspec"
+      ]
+    },
+    "Swashbuckle.AspNetCore.Newtonsoft/6.0.0": {
+      "sha512": "UGHxLjY5Y8kLHum7xCIoDG8Gc4X5Ccweo0HuGfU/3Et7FvK3WtEOAZgszyrRAN/jqQuD42G7MaTF2G+5s0QFxQ==",
+      "type": "package",
+      "path": "swashbuckle.aspnetcore.newtonsoft/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp3.0/Swashbuckle.AspNetCore.Newtonsoft.dll",
+        "lib/netcoreapp3.0/Swashbuckle.AspNetCore.Newtonsoft.pdb",
+        "lib/netstandard2.0/Swashbuckle.AspNetCore.Newtonsoft.dll",
+        "lib/netstandard2.0/Swashbuckle.AspNetCore.Newtonsoft.pdb",
+        "swashbuckle.aspnetcore.newtonsoft.6.0.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.newtonsoft.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore.Swagger/6.0.0": {
@@ -6059,7 +6087,8 @@
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 3.1.6",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.5",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.5",
-      "Swashbuckle.AspNetCore >= 6.0.0"
+      "Swashbuckle.AspNetCore >= 6.0.0",
+      "Swashbuckle.AspNetCore.Newtonsoft >= 6.0.0"
     ]
   },
   "packageFolders": {
@@ -6134,6 +6163,10 @@
             "version": "[5.0.5, )"
           },
           "Swashbuckle.AspNetCore": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
+          "Swashbuckle.AspNetCore.Newtonsoft": {
             "target": "Package",
             "version": "[6.0.0, )"
           }

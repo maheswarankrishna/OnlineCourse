@@ -45,6 +45,12 @@ namespace server_side.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCourse([FromBody] CourseCreateModel courses)
         {
+            var courseName = await _coursesRepository.CourseName(courses);
+            if (courseName)
+            {
+                return BadRequest("Course name already exists. Please enter a unique course name");
+            }
+
             string prefix = "";
             PutObjectRequest putobjectRequest = new PutObjectRequest();
             putobjectRequest.BucketName = "onlinecourseswithvideos";
@@ -62,6 +68,6 @@ namespace server_side.Controllers
         {
             var result = await _coursesRepository.UpdateCourse(courses);
             return Ok(result);
-        }
+        }        
     }
 }

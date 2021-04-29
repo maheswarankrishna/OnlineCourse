@@ -1,4 +1,5 @@
-﻿using server_side.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using server_side.Models;
 using server_side.Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,31 @@ namespace server_side.Repository
             _dbContext = dbContext;
         }
 
-        //public Task<CourseVideos> GetCourseName(int id)
-        //{
-        //   var courseName = _dbContext.Courses.FirstOrDefault(p => p.Id == id);
+        public async Task<string> GetCourseName(int id)
+        {
+            var courses = _dbContext.Courses.FirstOrDefault(p => p.Id == id);
+            var courseName = courses.CourseName;
 
-        //    return courseName;
-        //}
+            return courseName;
+        }
+
+        public async Task<CourseVideos> GetCoursesById(int Id)
+        {
+            var course = _dbContext.CourseVideos.Include(p => p.Courses).FirstOrDefault(p => p.Id == Id);
+
+            var courseVideos = new CourseVideos()
+            {
+                Id = course.Id,
+                FileName = course.FileName,
+                FilePath = course.FilePath,
+                Courses = new Courses()
+                {
+                    CourseName = course.Courses.CourseName
+                }
+            };
+
+            return courseVideos;
+        }
 
         public async Task<CourseVideos> UploadVideoForCourse(Videos videos, string path)
         {
