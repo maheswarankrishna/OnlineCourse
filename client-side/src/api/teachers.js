@@ -5,7 +5,7 @@ export async function GetAllTeachers(){
         const response = await axios.get(`http://localhost:64404/api/Auth/GetAllTeachers`);
         return response.data;
     } catch (error) {
-        console.log(error.message);
+        return error.message;
     }
 }
 

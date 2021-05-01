@@ -34,12 +34,13 @@ function App() {
           render={(props) => <RegisterScreen {...props} />}
         />
         <Route exact path="/home"   render={(props) => <Home {...props} />} />
-        {/* <Route exact path="/quizes"   render={(props) => <Home {...props} />} /> */}
-        {/* <Route exact path="/results"   render={(props) => <Home {...props} />} /> */}
+        
         
         {/* Student Paths */}
         <Route exact path="/courses" component={Courses} />
-        <Route exact path="/course" render={(props) => <Course {...props} />} />
+        <Route exact path="/courses/:id" render={(props) => <Course {...props} />} />
+        {/* <Route exact path="/quizes"   render={(props) => <Home {...props} />} /> */}
+        {/* <Route exact path="/results"   render={(props) => <Home {...props} />} /> */}
         {/* <Route exact path="/mycourses" component={Courses} /> */}
         
         {/* Teacher Paths */}
