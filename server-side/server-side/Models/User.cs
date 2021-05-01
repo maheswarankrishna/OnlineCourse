@@ -16,5 +16,7 @@ namespace server_side.Models
         public string LastName { get; set; }
         public UserType UserType { get; set; }
         public UserStatus Status { get; set; }
+        public virtual List<TeacherProfile> Teacher { get; set; }
+        public virtual List<StudentProfile> Student { get; set; }
     }
 }

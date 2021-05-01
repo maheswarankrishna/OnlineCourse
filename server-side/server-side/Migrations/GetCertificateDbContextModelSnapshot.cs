@@ -147,6 +147,28 @@ namespace server_side.Migrations
                     b.ToTable("QuizQuestions");
                 });
 
+            modelBuilder.Entity("server_side.Models.StudentProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentProfile");
+                });
+
             modelBuilder.Entity("server_side.Models.TeacherProfile", b =>
                 {
                     b.Property<int>("Id")
@@ -164,6 +186,8 @@ namespace server_side.Migrations
 
                     b.HasIndex("CourseId")
                         .IsUnique();
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("TeacherProfile");
                 });
@@ -245,6 +269,25 @@ namespace server_side.Migrations
                     b.Navigation("Quiz");
                 });
 
+            modelBuilder.Entity("server_side.Models.StudentProfile", b =>
+                {
+                    b.HasOne("server_side.Models.Courses", "Courses")
+                        .WithMany("Student")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("server_side.Models.User", "User")
+                        .WithMany("Student")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("server_side.Models.TeacherProfile", b =>
                 {
                     b.HasOne("server_side.Models.Courses", "Courses")
@@ -253,7 +296,15 @@ namespace server_side.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("server_side.Models.User", "User")
+                        .WithMany("Teacher")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Courses");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("server_side.Models.CourseType", b =>
@@ -265,6 +316,8 @@ namespace server_side.Migrations
                 {
                     b.Navigation("Quiz");
 
+                    b.Navigation("Student");
+
                     b.Navigation("Teacher");
 
                     b.Navigation("Videos");
@@ -273,6 +326,13 @@ namespace server_side.Migrations
             modelBuilder.Entity("server_side.Models.Quiz", b =>
                 {
                     b.Navigation("QuizQuestions");
+                });
+
+            modelBuilder.Entity("server_side.Models.User", b =>
+                {
+                    b.Navigation("Student");
+
+                    b.Navigation("Teacher");
                 });
 #pragma warning restore 612, 618
         }

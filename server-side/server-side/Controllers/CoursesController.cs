@@ -45,6 +45,13 @@ namespace server_side.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCourse([FromBody] CourseCreateModel courses)
         {
+
+            var teacher = await _coursesRepository.CheckTeacherApproved(courses.TeacherProfile.TeacherId);
+            if (!teacher)
+            {
+                return BadRequest("Teacher not approved to create course");
+            }            
+
             var courseName = await _coursesRepository.CourseName(courses);
             if (courseName)
             {
@@ -60,6 +67,35 @@ namespace server_side.Controllers
             var res = response.HttpStatusCode;
             var result = await _coursesRepository.CreateCourse(courses);
             return Ok(result);
+        }
+
+        [HttpGet("getCoursesForTeacher/{id}")]
+        public async Task<IActionResult> GetCoursesForTeacher(int Id)
+        {
+            var courses =await _coursesRepository.GetCourseForTeacher(Id);
+
+            return Ok(courses);
+        }
+
+        [HttpGet("getCoursesForStudent/{id}")]
+        public async Task<IActionResult> GetCoursesForStudent(int Id)
+        {
+            var courses = await _coursesRepository.GetCourseForStudent(Id);
+
+            if(courses == null)
+            {
+                return BadRequest("The Id does not match");
+            }
+
+            return Ok(courses);
+        }
+
+        [HttpPost("registerCourseForStudent")]
+        public async Task<IActionResult> registerCourseForStudent(RegisterCourseDto registerCourseDto)
+        {
+            var courses = await _coursesRepository.RegisterForCourseStudent(registerCourseDto);
+
+            return Ok(courses);
         }
 
         // PUT api/<CoursesController>/5

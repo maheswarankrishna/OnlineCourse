@@ -44,7 +44,7 @@ namespace server_side.Controllers
             {
                 return Unauthorized();                
             }
-            return Ok();
+            return Ok(users);
         }
 
         [HttpGet("GetAllTeachers")]
@@ -54,6 +54,15 @@ namespace server_side.Controllers
             
             return Ok(users);
         }
+
+        [HttpGet("GetAllUserTypes")]
+        public async Task<IActionResult> GetAllUserTypes()
+        {
+            var users = await _authRepository.GetUserTypes();
+
+            return Ok(users);
+        }
+
         [HttpPut("ToggleTeacherStatus")]
         public async Task<IActionResult> ToggleTeacherStatus(TeacherToggleDto teacherApproval)
         {

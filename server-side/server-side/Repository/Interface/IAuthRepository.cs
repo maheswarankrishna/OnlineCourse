@@ -14,6 +14,7 @@ namespace server_side.Repository.Interface
         Task<bool> IsUserExist(string email);
         Task<List<TeacherApprovalDto>> GetAllTeachers();
         Task<TeacherToggleDto> ToggleTeacherStatus(TeacherToggleDto TeacherApproval);
+        Task<List<UserTypes>> GetUserTypes();
 
     }
 }

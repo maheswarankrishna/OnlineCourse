@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static server_side.Utility.BaseEnums;
 
 namespace server_side.Repository
 {
@@ -137,6 +138,26 @@ namespace server_side.Repository
             await _dbContext.SaveChangesAsync();
 
             return teacherApproval;
+        }
+
+        public async Task<List<UserTypes>> GetUserTypes()
+        {
+            var userTypes = new List<UserTypes>();
+            var i = 1;
+            foreach (UserType item in Enum.GetValues(typeof(UserType)))
+            {
+                
+                userTypes.Add(new UserTypes
+                {
+                    Id = i,
+                    UserType = item.ToString()                    
+                });
+                i++;
+            }
+
+            return userTypes;
+
+
         }
     }
 }

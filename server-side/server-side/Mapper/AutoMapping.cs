@@ -19,12 +19,11 @@ namespace server_side.Mapper
             CreateMap<QuizQuestions, QuizQuestionsDto >().ReverseMap()
                 .ForMember(x => x.Quiz, opt => opt.Ignore());
             CreateMap<Courses, CoursesDto>().ReverseMap();
-            CreateMap<CourseVideos, CourseVideosDto>().ReverseMap();
-            ////CreateMap<Courses, CoursesDto>()
-            ////   .Include<Videos, CourseVideosDto>();
+            CreateMap<CourseVideos, CourseVideosDto>().ReverseMap();            
             CreateMap<CourseVideos, CourseVideosDto>();
-            //CreateMap<Courses, CoursesDto>()
-            //    .Include<CourseVideos, CourseVideosDto>();
+            CreateMap<Courses, CoursesForUsersDto>();
+            CreateMap<CoursesForUsersDto, Courses>();
+            
         }
     }
 }

@@ -86,10 +86,8 @@ namespace server_side.Controllers
                 var courseName =await _courseVideosRepository.GetCourseName(videoModel.CourseId);                                
                 var bucketName = "onlinecourseswithvideos";
 
-                string path = Path.Combine("https://onlinecourseswithvideos.s3.ap-south-1.amazonaws.com/", courseName, videoModel.FileName);
-
-
-            https://onlinecourseswithvideos.s3.ap-south-1.amazonaws.com/
+                //string path = Path.Combine("https://onlinecourseswithvideos.s3.ap-south-1.amazonaws.com/", courseName, videoModel.FileName);
+                          
 
                 await using var newMemoryStream = new MemoryStream();
                 videoModel.FormFiles.CopyTo(newMemoryStream);
@@ -101,8 +99,10 @@ namespace server_side.Controllers
                 putobjectRequest.Key = (prefix.TrimEnd('/') + "/" + videoModel.FileName.TrimEnd('/')).TrimStart('/');
                 putobjectRequest.InputStream = newMemoryStream;
                 var response = await _amazonS3.PutObjectAsync(putobjectRequest);
-                var res = response.HttpStatusCode;               
+                
+                var res = response.HttpStatusCode;
 
+                string path = Path.Combine("https://onlinecourseswithvideos.s3.ap-south-1.amazonaws.com/", courseName, videoModel.FileName);
 
                 await _courseVideosRepository.UploadVideoForCourse(videoModel, path);
 
@@ -121,7 +121,7 @@ namespace server_side.Controllers
         {
             var bucketName = "onlinecourseswithvideos";
             var course = await _courseVideosRepository.GetCoursesById(id);            
-            return Ok(course.FilePath);
+            return Ok(course);
         }
 
 

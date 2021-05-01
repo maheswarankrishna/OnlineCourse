@@ -14,5 +14,10 @@ namespace server_side.Repository
         Task<Courses> UpdateCourse(Courses course);
         Task<Courses> CreateCourse(CourseCreateModel course);
         Task<bool> CourseName(CourseCreateModel course);
+        Task<List<CoursesForUsersDto>> GetCourseForTeacher(int Id);
+        Task<List<CoursesForUsersDto>> GetCourseForStudent(int Id);
+        Task<RegisterCourseDto> RegisterForCourseStudent(RegisterCourseDto registerCourseDto);
+        Task<bool> CheckTeacherApproved(int Id);
+
     }
 }

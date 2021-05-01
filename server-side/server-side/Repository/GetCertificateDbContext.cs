@@ -19,5 +19,13 @@ namespace server_side.Repository
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<QuizQuestions> QuizQuestions { get; set; }
         public DbSet<User> Users { get; set; }
-    }
+        public DbSet<TeacherProfile> TeacherProfile { get; set; }
+        public DbSet<StudentProfile> StudentProfile { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);            
+        }
+    }       
+    
 }

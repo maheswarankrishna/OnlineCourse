@@ -20,6 +20,17 @@ namespace server_side.Repository
 
         }
 
+        public async Task<bool> CheckTeacherApproved(int Id)
+        {
+            var teacher = _dbContext.Users.FirstOrDefault(p => p.Id == Id);
+
+            if (teacher.Status != Utility.BaseEnums.UserStatus.Approved)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public async Task<bool> CourseName(CourseCreateModel course)
         {
             var courses = _dbContext.Courses.Select(p => p.CourseName).ToList();
@@ -36,7 +47,10 @@ namespace server_side.Repository
         }
 
         public async Task<Courses> CreateCourse(CourseCreateModel courseCreateModel)
-        {
+        {           
+
+            //if(courseCreateModel.TeacherProfile.TeacherId )
+
             var course = new Courses()
             {
                 CourseName = courseCreateModel.CourseName,
@@ -78,6 +92,39 @@ namespace server_side.Repository
             return courseModel;
         }
 
+        public async Task<List<CoursesForUsersDto>> GetCourseForStudent(int Id)
+        {
+            var student = _dbContext.Users.FirstOrDefault(p => p.Id == Id);
+
+            if(student.UserType != Utility.BaseEnums.UserType.Student)
+            {
+                return null;
+            }
+
+            var StudentCourses = _dbContext.StudentProfile.Where(p => p.StudentId == Id).Select(p => p.CourseId).ToList();
+
+            var result = await _dbContext.Courses.Include(e => e.Videos).Include(e => e.Quiz).Include(e => e.CourseType).ToListAsync();
+
+            var courses = result.Where(p => StudentCourses.Contains(p.Id)).ToList();
+
+            List<CoursesForUsersDto> courseDto = _mapper.Map<List<Courses>, List<CoursesForUsersDto>>(courses);
+
+            return courseDto;
+        }
+
+        public async Task<List<CoursesForUsersDto>> GetCourseForTeacher(int id)
+        {
+            var teacherCourses = _dbContext.TeacherProfile.Where(p => p.TeacherId == id).Select(p => p.CourseId).ToList();
+
+            var result = await _dbContext.Courses.Include(e => e.Videos).Include(e => e.Quiz).Include(e => e.CourseType).ToListAsync();
+
+            var courses = result.Where(p => teacherCourses.Contains(p.Id)).ToList();
+
+            List<CoursesForUsersDto> courseDto = _mapper.Map<List<Courses>, List<CoursesForUsersDto>>(courses);           
+
+            return courseDto;
+        }
+
         public async Task<CoursesDto> GetCoursesById(int Id)
         {
             var result = await  _dbContext.Courses.Include(e => e.Videos).Include(e => e.Quiz).FirstOrDefaultAsync(e => e.Id == Id);
@@ -87,6 +134,23 @@ namespace server_side.Repository
                     _mapper.Map<Courses, CoursesDto>(result);           
 
             return personViews;
+        }
+
+        public async Task<RegisterCourseDto> RegisterForCourseStudent(RegisterCourseDto registerCourseDto)
+        {
+
+            var registerCourseStudent = new StudentProfile()
+            {
+                StudentId = registerCourseDto.StudentId,
+                CourseId = registerCourseDto.CourseId
+            };
+
+            var courses = await _dbContext.StudentProfile.AddAsync(registerCourseStudent);
+            _dbContext.SaveChanges();            
+
+            return registerCourseDto;
+
+           
         }
 
         public async Task<Courses> UpdateCourse(Courses course)
