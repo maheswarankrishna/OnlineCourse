@@ -4,6 +4,9 @@ import { Table } from "react-bootstrap";
 import Screen from "../../components/Screen";
 import Row from "../../components/table/Row";
 
+import {GetAllTeachers, ApproveTeachers} from '../../api/teachers';
+
+
 class ApprovalScreen extends Component {
   constructor(props) {
     super(props);
@@ -13,32 +16,8 @@ class ApprovalScreen extends Component {
   }
 
   componentDidMount() {
-    //   get course and set state
-    const teachers = [
-      {
-        id: 1,
-        firstName: "Adam",
-        lastName: "Blake",
-        email: "ab@gmail.com",
-        status: "",
-      },
-      {
-        id: 2,
-        firstName: "Justin",
-        lastName: "Blake",
-        email: "jb@gmail.com",
-        status: "",
-      },
-      {
-        id: 3,
-        firstName: "Timber",
-        lastName: "Blake",
-        email: "tb@gmail.com",
-        status: "",
-      },
-    ];
-
-    this.setState({ ...this.state.teachers, teachers: teachers });
+    const res = GetAllTeachers();
+    res.then(result => { this.setState({ ...this.state.teachers, teachers: result }) });
   }
 
   componentDidUpdate() {
@@ -46,9 +25,7 @@ class ApprovalScreen extends Component {
   }
 
   Approve = (accept, teacherId) => {
-    console.log(accept, teacherId);
     const teachersBackup = this.state.teachers;
-    console.log(teachersBackup);
 
     let teacherUpdate = {};
     if (accept) {
@@ -63,8 +40,12 @@ class ApprovalScreen extends Component {
       }
     });
     console.log(teacherUpdate);
-    // this.props.UpdateBooking(bookingUpdate);
-    // if (this.props.teachers.error) this.setState({ teachers: bookingsBackup });
+
+    const res = ApproveTeachers(teacherUpdate);
+    res.then(result=>{
+      const status = result.status;
+      if (status===200) {this.setState({ teachers: teachersBackup });}
+    });
   };
 
   render() {
@@ -82,7 +63,7 @@ class ApprovalScreen extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.teachers.map((teacher) => (
+            {this.state.teachers && this.state.teachers.map((teacher) => (
               <Row key={teacher.id} teacher={teacher} update={this.Approve} />
             ))}
           </tbody>
