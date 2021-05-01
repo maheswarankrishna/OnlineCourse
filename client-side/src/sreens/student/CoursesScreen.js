@@ -19,7 +19,7 @@ class CoursesScreen extends Component {
     res.then(result => { this.setState({ ...this.state.courses, courses: result }) })
   }
 
-  componentDidUpdate() { console.log(this.state.courses); }
+  componentDidUpdate() {}
 
   render() {
     return (
@@ -28,6 +28,7 @@ class CoursesScreen extends Component {
           {this.state.courses && this.state.courses.map((course) => (
             <CourseCard
               key={course.id}
+              id={course.id}
               title={course.courseName}
               subtitle={course.courseType}
               description={course.description}

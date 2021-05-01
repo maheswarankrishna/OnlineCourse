@@ -5,6 +5,9 @@ import Screen from "../../components/Screen";
 import VideoCard from "../../components/video/VideoCard";
 import QuizCard from "../../components/quiz/QuizCard";
 
+import { GetSingleCourse } from "../../api/courses";
+import { GetSingleCourseType } from "../../api/courseType";
+
 class Course extends Component {
   constructor(props) {
     super(props);
@@ -14,25 +17,24 @@ class Course extends Component {
       description: "",
       courseType: "",
 
+
       videos: [],
       quizes: [],
     };
   }
 
   componentDidMount() {
-    // get and save courses in state
-    const course = {
-      id: 1,
-      name: "C# Basics",
-      description: "A complete description of how to handle C#",
-      courseType: "IT",
-    };
-    this.setState({
-      ...this.state.course,
-      id: course.id,
-      name: course.name,
-      description: course.description,
-      courseType: course.courseType,
+    // get course by Id
+    const { match: { params } } = this.props;
+    this.setState({...this.state.id, id:params.id});
+
+    const res = GetSingleCourse(params.id);
+    res.then(result => {
+      this.setState({ ...this.state, name: result.courseName, description: result.description });
+      const courseTypeResponse = GetSingleCourseType(result.courseTypeId);
+      courseTypeResponse.then(result => {
+        this.setState({ ...this.state.courseType, courseType: result.name })
+      })
     });
 
     // get and save videos in state
@@ -63,7 +65,7 @@ class Course extends Component {
 
   render() {
     return (
-      <Screen title={this.state.name}>
+      <Screen title={this.state.name} subtitle={this.state.description}>
         {/* TODO: Category must be included */}
         <Row style={{ marginTop: 20 }}>
           {/* Course Videos */}
@@ -71,7 +73,7 @@ class Course extends Component {
             <div style={{ width: "100%", padding: 10 }}>
               <h2>Videos</h2>
               <hr />
-              {this.state.videos.map(({ id, name, description, seen }) => (
+              {Array.isArray(this.state.videos) && this.state.videos.map(({ id, name, description, seen }) => (
                 <VideoCard
                   key={id}
                   name={name}
