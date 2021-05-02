@@ -120,11 +120,3 @@ class Login extends Component {
 }
 
 export default withRouter(Login);
-// const mapStateToProps = ({ auth }) => ({ auth });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   logoutUser: () => dispatch(logoutUser()),
-//   loginUser: (user) => dispatch(loginUser(user)),
-// });
-
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

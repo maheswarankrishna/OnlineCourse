@@ -34,9 +34,11 @@ export default function FormInput({
             >
               {as !== 'select'
                 ? null
-                : options.map((option) => (
-                    <option key={option}>{option}</option>
-                  ))}
+                :
+                options.map((option) => (
+                  <option key={option.id} value={option.name}>{option.name}</option>
+                ))
+              }
             </Form.Control>
           </>
         )}
