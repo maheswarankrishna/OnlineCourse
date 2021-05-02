@@ -13,8 +13,6 @@ import { RegisterUser } from '../api/users';
 class RegisterScreen extends Component {
   constructor(props) {
     super(props);
-    // this.requestChange = this.requestChange.bind(this);
-    // this.requestRegister = this.requestRegister.bind(this);
 
     this.state = {
       userTypes: [],

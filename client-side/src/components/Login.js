@@ -1,50 +1,38 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import FormInput from './form/FormInput';
+import { LoginUser, LogoutUser } from '../api/users';
 
 
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.requestChange = this.requestChange.bind(this);
-    this.requestLogin = this.requestLogin.bind(this);
 
     this.state = {
       email: '',
       password: '',
       status: {},
+      error: false,
+      errorMessage: '',
     };
   }
-
-  requestLogin = (values) => {
-    // this.props.loginUser(values);
-  };
-
-  requestChange = (event) => {
-    let { user } = this.state;
-    this.setState({
-      user: { ...user, [event.target.name]: event.target.value },
-    });
-  };
-
   componentDidMount() {
-    // this.props.logoutUser();
+    LogoutUser();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.auth.data !== this.props.auth.data) {
-      this.setState({ status: this.props.auth.data });
-    }
+  handleLogin = (values) => {
+    console.log(values);
+    var user = { email: values.email, password: values.password };
 
-    if (this.state.status.token) {
-      // this.props.history.push('/home');
-    }
-  }
+    const res = LoginUser(user);
+    res.then(result => { result === 200 ? this.props.history.push('/home') : this.setState({ ...this.state.error, error: true, errorMessage: 'Incorrect Email or Password.' }) })
+
+  };
 
   render() {
     const validationSchema = Yup.object().shape({
@@ -54,10 +42,10 @@ class Login extends Component {
 
     return (
       <>
+        {this.state.error && <Alert variant='danger'>{this.state.errorMessage}</Alert>}
         <Formik
           initialValues={{ email: '', password: '' }}
-          onSubmit={(values) => this.requestLogin(values)}
-          onChange={(event) => this.requestChange(event)}
+          onSubmit={(values) => this.handleLogin(values)}
           validationSchema={validationSchema}
         >
           {({
@@ -72,7 +60,7 @@ class Login extends Component {
                 width: 600,
                 padding: 50,
                 backgroundColor: 'inherit',
-                margin:'auto', alignItems:'center'
+                margin: 'auto', alignItems: 'center'
               }}
             >
               <h1>Sign In</h1>
@@ -102,18 +90,18 @@ class Login extends Component {
                 touched={touched.password}
               />
 
-              <div style={{marginLeft:0}}>
-                
-              <Button variant="dark" onClick={handleSubmit}>
-                Sign In
+              <div style={{ marginLeft: 0 }}>
+
+                <Button variant="dark" onClick={handleSubmit}>
+                  Sign In
               </Button>
-              <Button variant="link" onClick={()=>this.props.history.push('/register')}>Create an Account</Button>
+                <Button variant="link" onClick={() => this.props.history.push('/register')}>Create an Account</Button>
               </div>
             </Form>
           )}
         </Formik>
 
-        
+
       </>
     );
   }
