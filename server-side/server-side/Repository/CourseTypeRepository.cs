@@ -18,7 +18,7 @@ namespace server_side.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<CourseType> CreateCourseType(CourseTypeDto course)
+        public async Task<CourseTypeDto> CreateCourseType(CourseTypeDto course)
         {
             var courseType = new CourseType()
             {
@@ -30,7 +30,7 @@ namespace server_side.Repository
             var cou = await _dbContext.CourseTypes.AddAsync(courseType);
             _dbContext.SaveChanges();
 
-            return courseType;
+            return course;
         }
 
         public async Task<List<CourseType>> GetAllCourseTypes()

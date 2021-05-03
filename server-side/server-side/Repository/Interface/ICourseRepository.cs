@@ -18,6 +18,7 @@ namespace server_side.Repository
         Task<List<CoursesForUsersDto>> GetCourseForStudent(int Id);
         Task<RegisterCourseDto> RegisterForCourseStudent(RegisterCourseDto registerCourseDto);
         Task<bool> CheckTeacherApproved(int Id);
+        Task<List<CoursesForUsersDto>> GetCoursesByCategoryId(int Id);
 
     }
 }

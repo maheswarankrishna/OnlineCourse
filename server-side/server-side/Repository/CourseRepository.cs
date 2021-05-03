@@ -125,6 +125,15 @@ namespace server_side.Repository
             return courseDto;
         }
 
+        public async Task<List<CoursesForUsersDto>> GetCoursesByCategoryId(int Id)
+        {
+            var result =  _dbContext.Courses.Where(e => e.CourseTypeId == Id).ToList();
+           // var courses = _mapper.Map<CoursesDto>(result);
+            List<CoursesForUsersDto> courseDto = _mapper.Map<List<Courses>, List<CoursesForUsersDto>>(result);
+
+            return courseDto;
+        }
+
         public async Task<CoursesDto> GetCoursesById(int Id)
         {
             var result = await  _dbContext.Courses.Include(e => e.Videos).Include(e => e.Quiz).FirstOrDefaultAsync(e => e.Id == Id);

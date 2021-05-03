@@ -41,6 +41,13 @@ namespace server_side.Controllers
             return Ok(course);
         }
 
+        [HttpGet("courseByCategoryId/{id}")]
+        public async Task<IActionResult> GetCourseByCategoryId(int id)
+        {
+            var course = await _coursesRepository.GetCoursesByCategoryId(id);
+            return Ok(course);
+        }
+
         // POST api/<CoursesController>
         [HttpPost]
         public async Task<IActionResult> CreateCourse([FromBody] CourseCreateModel courses)

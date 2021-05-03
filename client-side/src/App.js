@@ -19,6 +19,7 @@ import Courses from "./sreens/student/CoursesScreen";
 import MyCoursesScreen from "./sreens/teacher/MyCoursesScreen";
 import MyCourseScreen from "./sreens/teacher/MyCourseScreen";
 import AddCourseScreen from "./sreens/teacher/AddCourseScreen";
+import CreateUserTypeScreen from "./sreens/admin/CreateUserTypeScreen";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
 
         {/* Admin Paths */}
         <Route exact path="/admin/approval" render={(props) => <ApprovalScreen {...props} />} />
+        <Route exact path="/admin/createusertype" render={(props) => <CreateUserTypeScreen {...props} />} />
       </Switch>
 
     </BrowserRouter>

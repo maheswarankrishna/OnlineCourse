@@ -11,6 +11,6 @@ namespace server_side.Repository.Interface
     {
         Task<List<CourseType>> GetAllCourseTypes();
         Task<CoursListWithTypes> GetCourseTypeById(int id);
-        Task<CourseType> CreateCourseType(CourseTypeDto course);
+        Task<CourseTypeDto> CreateCourseType(CourseTypeDto course);
     }
 }
