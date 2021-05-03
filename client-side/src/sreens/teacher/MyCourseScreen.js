@@ -5,6 +5,8 @@ import Screen from "../../components/Screen";
 import VideoCard from "../../components/video/VideoCard";
 import QuizCard from "../../components/quiz/QuizCard";
 
+import { getUserId } from "../../api/users";
+
 class MyCourseScreen extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +22,9 @@ class MyCourseScreen extends Component {
   }
 
   componentDidMount() {
-    // get and save courses in state
+    const {id} = getUserId();
+    console.log(id);
+
     const course = {
       id: 1,
       name: "C# Basics",

@@ -3,6 +3,9 @@ import Screen from "../../components/Screen";
 import CourseGrid from "../../components/course/CourseGrid";
 import CourseCard from "../../components/course/CourseCard";
 
+import { getUserId } from "../../api/users";
+import { GetCoursesByTeacherId } from "../../api/courses";
+
 export default class MyCourses extends Component {
   constructor(props) {
     super(props);
@@ -13,55 +16,23 @@ export default class MyCourses extends Component {
   }
 
   componentDidMount() {
-    // get courses for current logged in
-    const courseArray = [
-      {
-        id: 1,
-        title: "Basics",
-        subtitle: "Steps to Basics",
-        description: "A step by step process to do basics...",
-      },
-      {
-        id: 2,
-        title: "Intermediate",
-        subtitle: "Steps to Intermediate",
-        description: "A step by step process to do intermediate...",
-      },
-      {
-        id: 3,
-        title: "Pro",
-        subtitle: "Steps to Pro",
-        description: "A step by step process to do Pro...",
-      },
-      {
-        id: 4,
-        title: "Pro I",
-        subtitle: "Steps to Pro I",
-        description: "A step by step process to do Pro I  ...",
-      },
-      {
-        id: 5,
-        title: "Pro II",
-        subtitle: "Steps to Pro II",
-        description: "A step by step process to do Pro II  ...",
-      },
-    ];
-    this.setState({ ...this.state.courses, courseArray: courseArray });
-  }
-
-  componentDidUpdate() {
-
+    // get Id of auth user
+    const {id} = getUserId(); 
+    
+    // get courses by auth user (teacher)
+    const res = GetCoursesByTeacherId(id);
+    res.then(result=> this.setState({...this.state.courseArray, courseArray:result}))
   }
 
   render() {
     return (
-      <Screen title="Courses" subtitle="Select a course">
+      <Screen title="My Courses" subtitle="All your courses are available here">
         <CourseGrid>
-          {this.state.courseArray.map((course) => (
+          {Array.isArray(this.state.courseArray) && this.state.courseArray.map((course) => (
             <CourseCard
               key={course.index}
-              title={course.title}
-              subtitle={course.subtitle}
+              title={course.courseName}
+              subtitle={`CourseId: ${course.id}`}
               description={course.description}
             />
           ))}

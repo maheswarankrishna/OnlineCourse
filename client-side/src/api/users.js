@@ -16,8 +16,8 @@ export async function LoginUser(user) {
         // set local storage
         if (localStorage.getItem('user')) { localStorage.removeItem('user') }
 
-        var user = { id: response.data.id, userType: response.data.userType }
-        localStorage.setItem("user", JSON.stringify(user))
+        var userObj = { id: response.data.id, userType: response.data.userType }
+        localStorage.setItem("user", JSON.stringify(userObj))
 
         return response.status;
     } catch (error) {
@@ -39,12 +39,13 @@ export async function LogoutUser(id) {
     localStorage.clear();
 }
 
-// // Get userId of logged in user
-// export const getUserId = () => {
-//     const user = JSON.parse(localStorage.getItem('user'));
-//     if (localStorage.getItem('user') == null) {
-//       return null;
-//     } else {
-//       return user;
-//     }
-//   };
+// Get userId of logged in user
+export const getUserId = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    
+    if (!localStorage.getItem('user')) {
+        return null;
+    } else {
+        return user;
+    }
+};
