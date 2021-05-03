@@ -6,6 +6,7 @@ import VideoCard from "../../components/video/VideoCard";
 import QuizCard from "../../components/quiz/QuizCard";
 
 import { getUserId } from "../../api/users";
+import { GetSingleCourse } from "../../api/courses";
 
 class MyCourseScreen extends Component {
   constructor(props) {
@@ -22,22 +23,7 @@ class MyCourseScreen extends Component {
   }
 
   componentDidMount() {
-    const {id} = getUserId();
-    console.log(id);
-
-    const course = {
-      id: 1,
-      name: "C# Basics",
-      description: "A complete description of how to handle C#",
-      courseType: "IT",
-    };
-    this.setState({
-      ...this.state.course,
-      id: course.id,
-      name: course.name,
-      description: course.description,
-      courseType: course.courseType,
-    });
+    // const res = GetSingleCourse(id);
 
     // get and save videos in state
     const videos = [

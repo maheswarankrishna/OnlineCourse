@@ -2,11 +2,19 @@ import React from "react";
 import { useHistory } from 'react-router-dom';
 import { Card, Col } from "react-bootstrap";
 import CourseIcon from '../../assets/course-icon.png'
+import { getUserId } from "../../api/users";
 
 export default function CourseCard({ id, title, subtitle, description }) {
   let history = useHistory();
 
-  function handleClick() { history.push(`/courses/${id}`) }
+  function handleClick() { 
+    const {userType} = getUserId();  
+    if (userType==='Teacher'){
+      history.push(`teacher/courses/${id}`)   
+    }else{
+      history.push(`/courses/${id}`) 
+    }
+  }
 
   return (
     <>
