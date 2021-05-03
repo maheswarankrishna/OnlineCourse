@@ -7,12 +7,12 @@ import { getUserId } from "../../api/users";
 export default function CourseCard({ id, title, subtitle, description }) {
   let history = useHistory();
 
-  function handleClick() { 
-    const {userType} = getUserId();  
-    if (userType==='Teacher'){
-      history.push(`teacher/courses/${id}`)   
-    }else{
-      history.push(`/courses/${id}`) 
+  function handleClick() {
+    const { userType } = getUserId();
+    if (userType === 'Teacher') {
+      history.push(`teacher/courses/${id}`)
+    } else {
+      history.push(`/courses/${id}`)
     }
   }
 
@@ -24,7 +24,9 @@ export default function CourseCard({ id, title, subtitle, description }) {
           <Card.Body>
             <Card.Title>{title}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">{subtitle}</Card.Subtitle>
+
             <Card.Text >{description}</Card.Text>
+
             {/* <Card.Link href="#">Card Link</Card.Link> */}
             {/* <Card.Link href="#">Another Link</Card.Link> */}
           </Card.Body>

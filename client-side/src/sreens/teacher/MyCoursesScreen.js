@@ -30,7 +30,8 @@ export default class MyCourses extends Component {
         <CourseGrid>
           {Array.isArray(this.state.courseArray) && this.state.courseArray.map((course) => (
             <CourseCard
-              key={course.index}
+              key={course.id}
+              id={course.id}
               title={course.courseName}
               subtitle={`CourseId: ${course.id}`}
               description={course.description}

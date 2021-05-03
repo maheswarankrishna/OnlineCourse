@@ -46,7 +46,7 @@ function App() {
         
         {/* Teacher Paths */}
         <Route exact path="/teacher/courses" render={(props) => <MyCoursesScreen {...props} />} />
-        <Route exact path="/teacher/course" render={(props) => <MyCourseScreen {...props} />} />
+        <Route exact path="/teacher/courses/:id" render={(props) => <MyCourseScreen {...props} />} />
         <Route exact path="/teacher/addcourse" render={(props) => <AddCourseScreen {...props} />} />
 
         {/* Admin Paths */}
