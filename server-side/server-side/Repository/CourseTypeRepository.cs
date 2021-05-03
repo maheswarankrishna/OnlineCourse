@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using server_side.Dtos;
 using server_side.Models;
 using server_side.Repository.Interface;
 using System;
@@ -16,6 +17,22 @@ namespace server_side.Repository
         {
             _dbContext = dbContext;
         }
+
+        public async Task<CourseType> CreateCourseType(CourseTypeDto course)
+        {
+            var courseType = new CourseType()
+            {
+                Name = course.Name,
+                Subtitle = course.Subtitle,
+                Description = course.Description
+            };
+
+            var cou = await _dbContext.CourseTypes.AddAsync(courseType);
+            _dbContext.SaveChanges();
+
+            return courseType;
+        }
+
         public async Task<List<CourseType>> GetAllCourseTypes()
         {
             var courseTypes = await _dbContext.CourseTypes.ToListAsync();

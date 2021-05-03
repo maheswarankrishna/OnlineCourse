@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using server_side.Dtos;
 using server_side.Repository.Interface;
 
 namespace server_side.Controllers
@@ -32,6 +33,13 @@ namespace server_side.Controllers
         {
             var couresTypes = await _coursesTypeRepository.GetCourseTypeById(id);
             return Ok(couresTypes);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateCourseType(CourseTypeDto courseTypeDto)
+        {
+            var courses = await _coursesTypeRepository.CreateCourseType(courseTypeDto);
+
+            return Ok(courses);
         }
     }
 }

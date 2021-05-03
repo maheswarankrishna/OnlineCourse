@@ -1,4 +1,5 @@
-﻿using server_side.Models;
+﻿using server_side.Dtos;
+using server_side.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace server_side.Repository.Interface
     {
         Task<List<CourseType>> GetAllCourseTypes();
         Task<CoursListWithTypes> GetCourseTypeById(int id);
+        Task<CourseType> CreateCourseType(CourseTypeDto course);
     }
 }
