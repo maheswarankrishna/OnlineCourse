@@ -17,3 +17,13 @@ export async function GetSingleCourseType(id) {
         return error.message
     }
 }
+
+export async function CreateCourseCategoryType(categoryType) {
+    console.log(categoryType);
+    try {
+        const response = await axios.post(`http://localhost:64404/api/CourseType`, categoryType);
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}

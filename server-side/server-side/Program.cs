@@ -20,7 +20,7 @@ namespace server_side
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>().UseUrls("http://localhost:5010");
+                    webBuilder.UseStartup<Startup>()/*.UseUrls("http://localhost:5010")*/;
                 });
     }
 }
