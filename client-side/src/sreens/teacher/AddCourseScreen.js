@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { Alert, Button, Form } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -14,7 +14,7 @@ import { getUserId } from "../../api/users";
 function AddCourseScreen(props) {
   const [categories, setCategories] = useState();
   const [error, setError] = useState(false);
-  let history = useHistory();
+  // let history = useHistory();
 
   // getting the categories from the API 
   useEffect(() => {
@@ -36,8 +36,9 @@ function AddCourseScreen(props) {
     res.then(result => { result === 200 ? console.log(result) : setError(true) });
     // history.push('/teacher/courses')
   };
-
-  const initalValues = { title: '', description: '', courseType: '' };
+  
+  const initial = Array.isArray(categories) && categories[0].name;
+  const initalValues = { title: '', description: '', courseType: initial };
   const validationSchema = Yup.object().shape({
     title: Yup.string().required().label("Course Title"),
     description: Yup.string().required().label("Course Description"),
