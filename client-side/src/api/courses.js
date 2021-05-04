@@ -36,3 +36,13 @@ export async function GetCoursesByTeacherId(id){
         return error.message
     }
 }
+
+export async function CreateCourse(course){
+    console.log(course.teacherId);
+    try {
+        const response = await axios.post('http://localhost:64404/api/courses', course);
+        return response.status;
+    } catch (error) {
+        return error.response.status
+    }
+}

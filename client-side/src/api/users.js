@@ -12,7 +12,7 @@ export async function GetUserTypes() {
 export async function LoginUser(user) {
     try {
         const response = await axios.post(`http://localhost:64404/api/auth/login`, user);
-        console.log(response.data);
+        
         // set local storage
         if (localStorage.getItem('user')) { localStorage.removeItem('user') }
 
@@ -26,7 +26,6 @@ export async function LoginUser(user) {
 }
 
 export async function RegisterUser(user) {
-    console.log(user);
     try {
         const response = await axios.post(`http://localhost:64404/api/auth/register`, user);
         return response.status;

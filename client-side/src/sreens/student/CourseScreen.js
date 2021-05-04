@@ -37,6 +37,7 @@ class Course extends Component {
       })
     });
 
+
     // get and save videos in state
     const videos = [
       { id: 1, name: "Introduction", description: "First steps", seen: true },
@@ -73,12 +74,13 @@ class Course extends Component {
             <div style={{ width: "100%", padding: 10 }}>
               <h2>Videos</h2>
               <hr />
-              {Array.isArray(this.state.videos) && this.state.videos.map(({ id, name, description, seen }) => (
+              {Array.isArray(this.state.videos) && this.state.videos.map(({ id, name, description, seen , videoURL }) => (
                 <VideoCard
                   key={id}
                   name={name}
                   description={description}
                   seen={seen}
+                  // videoURL={videoURL}
                 />
               ))}
             </div>
