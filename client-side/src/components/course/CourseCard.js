@@ -12,7 +12,7 @@ export default function CourseCard({ id, title, subtitle, description }) {
     if (userType === 'Teacher') {
       history.push(`/teacher/courses/${id}`)
     } else {
-      history.push(`/courses/${id}`)
+      history.push(`/student/courses/${id}`)
     }
   }
 
