@@ -12,12 +12,12 @@ export async function GetUserTypes() {
 export async function LoginUser(user) {
     try {
         const response = await axios.post(`http://localhost:64404/api/auth/login`, user);
-        console.log(response.data);
+        
         // set local storage
         if (localStorage.getItem('user')) { localStorage.removeItem('user') }
 
-        var user = { id: response.data.id, userType: response.data.userType }
-        localStorage.setItem("user", JSON.stringify(user))
+        var userObj = { id: response.data.id, userType: response.data.userType }
+        localStorage.setItem("user", JSON.stringify(userObj))
 
         return response.status;
     } catch (error) {
@@ -26,7 +26,6 @@ export async function LoginUser(user) {
 }
 
 export async function RegisterUser(user) {
-    console.log(user);
     try {
         const response = await axios.post(`http://localhost:64404/api/auth/register`, user);
         return response.status;
@@ -39,12 +38,13 @@ export async function LogoutUser(id) {
     localStorage.clear();
 }
 
-// // Get userId of logged in user
-// export const getUserId = () => {
-//     const user = JSON.parse(localStorage.getItem('user'));
-//     if (localStorage.getItem('user') == null) {
-//       return null;
-//     } else {
-//       return user;
-//     }
-//   };
+// Get userId of logged in user
+export const getUserId = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    
+    if (!localStorage.getItem('user')) {
+        return null;
+    } else {
+        return user;
+    }
+};

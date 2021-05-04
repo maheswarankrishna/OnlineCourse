@@ -35,7 +35,7 @@ export default function FormInput({
               {as !== 'select'
                 ? null
                 :
-                options.map((option) => (
+                Array.isArray(options) && options.map((option) => (
                   <option key={option.id} value={option.name}>{option.name}</option>
                 ))
               }

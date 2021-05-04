@@ -38,15 +38,15 @@ function App() {
         
         
         {/* Student Paths */}
-        <Route exact path="/courses" component={Courses} />
-        <Route exact path="/courses/:id" render={(props) => <Course {...props} />} />
+        <Route exact path="/student/courses" component={Courses} />
+        <Route exact path="/student/courses/:id" render={(props) => <Course {...props} />} />
         {/* <Route exact path="/quizes"   render={(props) => <Home {...props} />} /> */}
         {/* <Route exact path="/results"   render={(props) => <Home {...props} />} /> */}
         {/* <Route exact path="/mycourses" component={Courses} /> */}
         
         {/* Teacher Paths */}
         <Route exact path="/teacher/courses" render={(props) => <MyCoursesScreen {...props} />} />
-        <Route exact path="/teacher/course" render={(props) => <MyCourseScreen {...props} />} />
+        <Route exact path="/teacher/courses/:id" render={(props) => <MyCourseScreen {...props} />} />
         <Route exact path="/teacher/addcourse" render={(props) => <AddCourseScreen {...props} />} />
 
         {/* Admin Paths */}

@@ -5,6 +5,10 @@ import Screen from "../../components/Screen";
 import VideoCard from "../../components/video/VideoCard";
 import QuizCard from "../../components/quiz/QuizCard";
 
+import { GetSingleCourse } from "../../api/courses";
+import { GetSingleCourseType } from "../../api/courseType";
+
+
 class MyCourseScreen extends Component {
   constructor(props) {
     super(props);
@@ -20,45 +24,18 @@ class MyCourseScreen extends Component {
   }
 
   componentDidMount() {
-    // get and save courses in state
-    const course = {
-      id: 1,
-      name: "C# Basics",
-      description: "A complete description of how to handle C#",
-      courseType: "IT",
-    };
-    this.setState({
-      ...this.state.course,
-      id: course.id,
-      name: course.name,
-      description: course.description,
-      courseType: course.courseType,
+    const { match: { params } } = this.props;
+    this.setState({ ...this.state.id, id: params.id });
+
+    const res = GetSingleCourse(params.id);
+    res.then(result => {
+      this.setState({ ...this.state, name: result.courseName, description: result.description, quizes: result.quiz, videos: result.videos });
+      const courseTypeResponse = GetSingleCourseType(result.courseTypeId);
+      courseTypeResponse.then(result => {
+        this.setState({ ...this.state.courseType, courseType: result.name })
+      })
     });
 
-    // get and save videos in state
-    const videos = [
-      { id: 1, name: "Introduction", description: "First steps", seen: true },
-      { id: 2, name: "Chapter 1", description: "Second steps", seen: true },
-      { id: 3, name: "Chapter 2", description: "Third steps", seen: true },
-      { id: 4, name: "Chapter 3", description: "Fourth steps", seen: false },
-      { id: 5, name: "Chapter 4", description: "Fifth steps", seen: false },
-      { id: 6, name: "Chapter 5", description: "Sixth steps", seen: false },
-      { id: 7, name: "Chapter 6", description: "Seventh steps", seen: false },
-    ];
-    this.setState({ ...this.state.videos, videos: videos });
-
-    // get and save quizes in state
-    const quizes = [
-      { id: 1, name: "Introduction", description: "Quiz 1", attempted: true },
-      { id: 2, name: "Chapter 1", description: "Quiz 2", attempted: true },
-      { id: 3, name: "Chapter 2", description: "Quiz 3", attempted: true },
-      { id: 4, name: "Chapter 3", description: "Quiz 4", attempted: false },
-    ];
-    this.setState({ ...this.state.quizes, quizes: quizes });
-  }
-
-  componentDidUpdate() {
-    console.log(this.state);
   }
 
   render() {
@@ -71,12 +48,13 @@ class MyCourseScreen extends Component {
             <div style={{ width: "100%", padding: 10 }}>
               <h2>Videos</h2>
               <hr />
-              {this.state.videos.map(({ id, name, description, seen }) => (
+              {console.log(this.state.videos)}
+              {Array.isArray(this.state.videos)&&this.state.videos.map(({ id, fileName, videoDescription, filePath }) => (
                 <VideoCard
                   key={id}
-                  name={name}
-                  description={description}
-                  seen={seen}
+                  name={fileName}
+                  description={videoDescription}
+                  videoURL={filePath}
                 />
               ))}
             </div>
@@ -87,13 +65,8 @@ class MyCourseScreen extends Component {
             <div style={{ width: "100%", padding: 10 }}>
               <h2>Quizes</h2>
               <hr />
-              {this.state.quizes.map(({ id, name, description, attempted }) => (
-                <QuizCard
-                  key={id}
-                  name={name}
-                  description={description}
-                  attempted={attempted}
-                />
+              {Array.isArray(this.state.quizes) && this.state.quizes.map(({ id, quizName, quizDescription }) => (
+                <QuizCard key={id} id={id} name={quizName} description={quizDescription} />
               ))}
             </div>
           </Col>

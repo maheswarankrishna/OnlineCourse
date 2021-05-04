@@ -1,24 +1,24 @@
 import React from "react";
-import {Button, Modal} from 'react-bootstrap';
-import VideoImage from '../../assets/video-icon.png';
+import { Modal } from 'react-bootstrap';
+import ReactPlayer from 'react-player'
 
-function VideoView({ name, videoURL, close, show, hide }) {
+function VideoView({ name, video, show, hide }) {
   return (
     <>
-      <Modal show={show} onHide={hide}>
-        {/* <Modal.Dialog> */}
-          <Modal.Header closeButton>
-            <Modal.Title>{name}</Modal.Title>
-          </Modal.Header>
+      <Modal show={show} onHide={hide} centered size='xl'>
+        
+        <Modal.Header closeButton>
+          <Modal.Title>{name}</Modal.Title>
+        </Modal.Header>
 
-          <Modal.Body>
-            <img src={VideoImage} width={'100%'} height={'100%'} alt='Video Playing'/>
-          </Modal.Body>
+        <Modal.Body>
+          <ReactPlayer url={video} width={'100%'} />
+        </Modal.Body>
 
-          <Modal.Footer>
-            <Button variant="secondary" onClick={hide}>Close</Button>
-          </Modal.Footer>
-        {/* </Modal.Dialog> */}
+        <Modal.Footer>
+          <p>*** Double click to view full screen</p>
+        </Modal.Footer>
+        
       </Modal>
     </>
   );
