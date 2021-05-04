@@ -53,7 +53,7 @@ namespace server_side.Controllers
         public async Task<IActionResult> CreateCourse([FromBody] CourseCreateModel courses)
         {
 
-            var teacher = await _coursesRepository.CheckTeacherApproved(courses.TeacherProfile.TeacherId);
+            var teacher = await _coursesRepository.CheckTeacherApproved(courses.TeacherId);
             if (!teacher)
             {
                 return BadRequest("Teacher not approved to create course");
