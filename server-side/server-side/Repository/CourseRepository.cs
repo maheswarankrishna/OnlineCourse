@@ -58,8 +58,7 @@ namespace server_side.Repository
                 CourseTypeId = courseCreateModel.CourseType,
                 Teacher = new TeacherProfile
                 {
-                    TeacherId = courseCreateModel.TeacherProfile.TeacherId,
-                    CourseId = courseCreateModel.TeacherProfile.CourseId
+                    TeacherId = courseCreateModel.TeacherId,                   
                 }
                 
             };
