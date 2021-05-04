@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { withRouter } from 'react-router-dom';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -12,7 +12,7 @@ import { CreateCourseCategoryType } from '../../api/courseType';
  class CreateUserTypeScreen extends Component{
     constructor(props) {
         super(props);    
-        
+        this.state={};
       }
 
       CourseCategory = (reqcourseType) => {

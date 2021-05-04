@@ -10,7 +10,7 @@ export default function CourseCard({ id, title, subtitle, description }) {
   function handleClick() {
     const { userType } = getUserId();
     if (userType === 'Teacher') {
-      history.push(`teacher/courses/${id}`)
+      history.push(`/teacher/courses/${id}`)
     } else {
       history.push(`/courses/${id}`)
     }

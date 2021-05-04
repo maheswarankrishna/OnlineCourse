@@ -5,7 +5,7 @@ import VideoHolder from "../../assets/video-icon.png";
 import VideoView from "./VideoView";
 
 
-function VideoCard({ name, description, seen, onClick, show, hide, videoURL }) {
+function VideoCard({ name, description, videoURL }) {
   const [modal, setModal] = useState(false);
 
   return (
@@ -20,12 +20,7 @@ function VideoCard({ name, description, seen, onClick, show, hide, videoURL }) {
         />
 
         <Media.Body style={{ alignItems: 'center', marginTop: 'auto' }}>
-          <h6>
-            {name}
-            {seen && (
-              <span style={{ color: "blue", marginLeft: 10 }}>seen</span>
-            )}
-          </h6>
+          <h6>{name}</h6>
           <p>{description}</p>
         </Media.Body>
       </Media>

@@ -25,11 +25,11 @@ class MyCourseScreen extends Component {
 
   componentDidMount() {
     const { match: { params } } = this.props;
-    this.setState({...this.state.id, id:params.id});
+    this.setState({ ...this.state.id, id: params.id });
 
     const res = GetSingleCourse(params.id);
     res.then(result => {
-      this.setState({ ...this.state, name: result.courseName, description: result.description });
+      this.setState({ ...this.state, name: result.courseName, description: result.description, quizes: result.quiz, videos: result.videos });
       const courseTypeResponse = GetSingleCourseType(result.courseTypeId);
       courseTypeResponse.then(result => {
         this.setState({ ...this.state.courseType, courseType: result.name })
@@ -48,12 +48,13 @@ class MyCourseScreen extends Component {
             <div style={{ width: "100%", padding: 10 }}>
               <h2>Videos</h2>
               <hr />
-              {this.state.videos.map(({ id, name, description, seen }) => (
+              {console.log(this.state.videos)}
+              {Array.isArray(this.state.videos)&&this.state.videos.map(({ id, fileName, videoDescription, filePath }) => (
                 <VideoCard
                   key={id}
-                  name={name}
-                  description={description}
-                  seen={seen}
+                  name={fileName}
+                  description={videoDescription}
+                  videoURL={filePath}
                 />
               ))}
             </div>
@@ -64,13 +65,8 @@ class MyCourseScreen extends Component {
             <div style={{ width: "100%", padding: 10 }}>
               <h2>Quizes</h2>
               <hr />
-              {this.state.quizes.map(({ id, name, description, attempted }) => (
-                <QuizCard
-                  key={id}
-                  name={name}
-                  description={description}
-                  attempted={attempted}
-                />
+              {Array.isArray(this.state.quizes) && this.state.quizes.map(({ id, quizName, quizDescription }) => (
+                <QuizCard key={id} id={id} name={quizName} description={quizDescription} />
               ))}
             </div>
           </Col>

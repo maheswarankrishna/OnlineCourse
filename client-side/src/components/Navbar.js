@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Nav, Navbar, NavDropdown, NavLink } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 import { getUserId } from "../api/users";
 
@@ -25,7 +25,6 @@ export default function Navigationbar(props) {
 
   return (
     <>
-      {console.log(userType)}
       <Navbar bg="white" expand="lg" sticky="top">
         <Navbar.Brand href="/home">Online Certificate</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -36,8 +35,6 @@ export default function Navigationbar(props) {
             {userType && userType==='Teacher' && Teacher.map(({link, title}, index) => <Nav.Link key={index}href={link}>{title}</Nav.Link>)}
             {userType && userType==='Student' && Student.map(({link, title}, index) => <Nav.Link key={index}href={link}>{title}</Nav.Link>)}
             
-
-
             <NavDropdown title="Account" id="basic-nav-dropdown">
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
