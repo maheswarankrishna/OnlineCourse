@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Amazon.Runtime;
 using Amazon.S3.Transfer;
 using Microsoft.Extensions.Options;
+using Amazon;
 
 namespace server_side.Controllers
 {
@@ -21,7 +22,7 @@ namespace server_side.Controllers
     public class CourseVideosController : ControllerBase
     {
         private readonly ICourseVideosRepository _courseVideosRepository;
-        private readonly IAmazonS3 _amazonS3;
+        private  IAmazonS3 _amazonS3;
         
         public CourseVideosController(ICourseVideosRepository courseVideosRepository, IAmazonS3 amazonS3)
         {
@@ -32,8 +33,10 @@ namespace server_side.Controllers
         public async Task<IActionResult> UploadVideos([FromForm] Videos videoModel)
         {
             try
-            {              
-                                       
+            {
+                RegionEndpoint regionEndpoint = RegionEndpoint.APSouth1;
+
+                _amazonS3 = new AmazonS3Client("AKIAQJJINF765X7UTRXB", "tlmXVlNAMPJ8ms4q+wfp4sZNnA5ZMN9lKKkOTsFB", regionEndpoint);
 
                 //var fileTransferUtility = new TransferUtility(client);
                 //await fileTransferUtility.UploadAsync(uploadRequest);

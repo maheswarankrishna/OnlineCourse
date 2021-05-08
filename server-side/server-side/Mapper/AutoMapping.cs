@@ -23,6 +23,9 @@ namespace server_side.Mapper
             CreateMap<CourseVideos, CourseVideosDto>();
             CreateMap<Courses, CoursesForUsersDto>();
             CreateMap<CoursesForUsersDto, Courses>();
+            CreateMap<Quiz, QuizAddDto>();
+            CreateMap<QuizAddDto, Quiz>();
+            CreateMap<QuizQuestionsDto, QuizQuestions>();
             
         }
     }

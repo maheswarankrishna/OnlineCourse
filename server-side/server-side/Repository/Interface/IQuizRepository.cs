@@ -13,5 +13,7 @@ namespace server_side.Repository.Interface
         Task<List<Quiz>> GetAllQuizzes();
         Task<Quiz> UpdateQuiz(Courses course);
         Task<QuizDto> CreateQuiz(QuizDto quiz);
+        Task<QuizAddDto> CreateQuizById(QuizAddDto quizDto);
+        Task<QuizQuestionsDto> CreateQuizQuestions(QuizQuestionsDto quizQuestionsDto);
     }
 }

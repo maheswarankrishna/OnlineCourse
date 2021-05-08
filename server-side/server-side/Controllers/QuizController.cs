@@ -45,6 +45,20 @@ namespace server_side.Controllers
             return Ok(result);
         }
 
+        [HttpPost("CreateSingleQuiz")]
+        public async Task<IActionResult> CreateSingleQuiz([FromBody] QuizAddDto quizz)
+        {
+            var result = await _quizRepository.CreateQuizById(quizz);
+            return Ok(result);
+        }
+
+        [HttpPost("AddQuizQuestion")]
+        public async Task<IActionResult> CreateQuizQuestion([FromBody] QuizQuestionsDto quizz)
+        {
+            var result = await _quizRepository.CreateQuizQuestions(quizz);
+            return Ok(result);
+        }
+
         // PUT api/<QuizController>/5
         //[HttpPut("{id}")]
         //public async Task<IActionResult> Put(int id, [FromBody] Courses courses)

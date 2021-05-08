@@ -1,0 +1,28 @@
+docker build . -t clientapp
+
+
+
+docker tag clientapp krishna18/clientapp
+
+docker push krishna18/clientapp
+
+asas
+
+docker run -d -it -p 80:80/tcp --name clientapp krishna18/clientapp latest
+
+ubutut install aws cli
+
+{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPublicRead",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::onlinecourseswithvideos/*"
+        }
+    ]
+}
