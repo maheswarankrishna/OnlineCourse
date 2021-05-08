@@ -52,7 +52,7 @@ function App() {
         <Route exact path="/teacher/courses/:id" render={(props) => <MyCourseScreen {...props} />} />
         <Route exact path="/teacher/addcourse" render={(props) => <AddCourseScreen {...props} />} />
         <Route exact path="/teacher/courses/:id/addvideo" render={(props) => <AddVideoScreen {...props} />} />
-        <Route exact path="/teacher/addquiz" component={AddQuizScreen} />
+        <Route exact path="/teacher/courses/:id/addquiz" component={AddQuizScreen} />
         
         {/* Admin Paths */}
         <Route exact path="/admin/approval" render={(props) => <ApprovalScreen {...props} />} />

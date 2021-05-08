@@ -41,6 +41,9 @@ class MyCourseScreen extends Component {
   addVideo(courseId){
     this.props.history.push(`/teacher/courses/${courseId}/addvideo`);
   }
+  addQuiz(courseId){
+    this.props.history.push(`/teacher/courses/${courseId}/addQuiz`);
+  }
 
   render() {
     return (
@@ -75,6 +78,9 @@ class MyCourseScreen extends Component {
               {Array.isArray(this.state.quizes) && this.state.quizes.map(({ id, quizName, quizDescription }) => (
                 <QuizCard key={id} id={id} name={quizName} description={quizDescription} />
               ))}
+            </div>
+            <div>
+              <Button variant='primary' onClick={()=>this.addQuiz(this.state.id)}>Add Quiz</Button>
             </div>
           </Col>
         </Row>

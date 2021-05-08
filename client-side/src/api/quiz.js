@@ -19,3 +19,13 @@ export async function GetQuizById(id) {
         return error.message;
     }
 }
+
+export async function CreateQuiz(quiz) {
+    try {
+        const response = await axios.post(`http://localhost:64404/api/quiz`, quiz);
+        return response.status;
+
+    } catch (error) {
+        return error.message;
+    }
+}
