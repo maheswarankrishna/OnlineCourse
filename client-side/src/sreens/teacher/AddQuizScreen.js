@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
 import { Alert, Button, Form } from 'react-bootstrap';
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -8,10 +9,16 @@ import FormInput from "../../components/form/FormInput";
 import { CreateQuiz } from '../../api/quiz';
 
 
-export default function AddQuizScreen(props) {
+export default function AddQuizScreen({ match }) {
     const [error, setError] = useState(false);
-    // const [questions, setQuestions] = useState([]);
-    // const [quiz, setQuiz] = useState({});
+    const [courseId, setCourseId] = useState();
+    let history = useHistory();
+
+    useEffect(() => {
+        let mounted = true;
+        setCourseId(match.params.id);
+        return () => mounted = false;
+    }, [])
 
     const initialValues = { quizName: '', quizDescription: '' }
     const quizValidationSchema = Yup.object().shape({
@@ -27,10 +34,11 @@ export default function AddQuizScreen(props) {
     //     correctAnswer: Yup.number().integer().required().label('Correct Answer'),
     // })
 
-    const onSubmitQuiz = (reqQuiz) => { 
-        var quiz = {quizName: reqQuiz.quizName, quizDescription: reqQuiz.quizDescription};
-        const res = CreateQuiz(quiz); 
-        res.then(result=> { result === 200 ? console.log(result) : setError(true) })
+    const onSubmitQuiz = (reqQuiz) => {
+        const id = parseInt(courseId);
+        var quiz = { QuizName: reqQuiz.quizName, QuizDescription: reqQuiz.quizDescription, CourseId: id };
+        const res = CreateQuiz(quiz);
+        res.then(result => { result === 200 ? history.push(`/teacher/courses/${courseId}`) : setError(true) })
     }
 
 
@@ -47,7 +55,7 @@ export default function AddQuizScreen(props) {
     // </>;
 
     return (
-        
+
         <Screen title="Add Quiz">
             {error && <Alert variant='danger'>Failed to Create Quiz!</Alert>}
             <Formik initialValues={{ quizName: '', quizDescription: '' }} onSubmit={(values) => onSubmitQuiz(values)} validationSchema={quizValidationSchema}>

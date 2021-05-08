@@ -22,7 +22,9 @@ export async function GetQuizById(id) {
 
 export async function CreateQuiz(quiz) {
     try {
-        const response = await axios.post(`http://localhost:64404/api/quiz`, quiz);
+        console.log(quiz);
+        const response = await axios.post('http://localhost:64404/api/quiz/CreateSingleQuiz', quiz);
+        console.log(response.data);
         return response.status;
 
     } catch (error) {

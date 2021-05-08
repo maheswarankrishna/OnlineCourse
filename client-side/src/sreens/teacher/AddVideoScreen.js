@@ -35,8 +35,8 @@ class AddVideoScreen extends Component {
     console.log(videoObj);
 
     const res = AddVideo(videoObj);
-    res.then(result => { result === 200 ? console.log(res) : this.setState({ error: true }) })
-    // this.props.history.push(`/teacher/courses/${this.state.id}`)
+    res.then(result => { result === 200 ? this.props.history.push(`/teacher/courses/${this.state.id}`) : this.setState({ error: true }) })
+    
 
   };
 
