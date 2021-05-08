@@ -3,3 +3,4 @@ client-side/package-lock.json
 server-side/.vs/server-side/v15/Server/sqlite3/db.lock
 client-side/package-lock.json
 client-side/package-lock.json
+server-side/.vs/config/applicationhost.config
