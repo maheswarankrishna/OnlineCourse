@@ -104,7 +104,7 @@ namespace server_side.Repository
 
         public async Task<List<TeacherApprovalDto>> GetAllTeachers()
         {
-            var teachers = _dbContext.Users.Where(p => p.UserType == Utility.BaseEnums.UserType.Teacher).ToList();
+            var teachers = _dbContext.Users.Where(p => p.UserType == Utility.BaseEnums.UserType.Teacher && p.Status == Utility.BaseEnums.UserStatus.Pending).ToList();
 
             var teacherApproval = new List<TeacherApprovalDto>();
 

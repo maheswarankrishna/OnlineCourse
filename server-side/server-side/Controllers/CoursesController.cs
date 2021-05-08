@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +18,7 @@ namespace server_side.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly ICourseRepository _coursesRepository;
-        private readonly IAmazonS3 _amazonS3;
+        private IAmazonS3 _amazonS3;
 
         public CoursesController(ICourseRepository coursesRepository, IAmazonS3 amazonS3)
         {
@@ -64,6 +65,10 @@ namespace server_side.Controllers
             {
                 return BadRequest("Course name already exists. Please enter a unique course name");
             }
+
+            RegionEndpoint regionEndpoint = RegionEndpoint.APSouth1;
+
+            _amazonS3 = new AmazonS3Client("AKIAQJJINF765X7UTRXB", "tlmXVlNAMPJ8ms4q+wfp4sZNnA5ZMN9lKKkOTsFB", regionEndpoint);
 
             string prefix = "";
             PutObjectRequest putobjectRequest = new PutObjectRequest();

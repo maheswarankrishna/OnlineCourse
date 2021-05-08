@@ -29,6 +29,25 @@ namespace server_side.Repository
             return quizResult;
         }
 
+        public async Task<QuizAddDto> CreateQuizById(QuizAddDto quizDto)
+        {
+            var quiz = _mapper.Map<Quiz>(quizDto);
+            var quizzes = await _dbContext.Quizzes.AddAsync(quiz);
+            _dbContext.SaveChanges();
+            //quizzes.MapTo<AgentUserModel>()
+            var quizResult = _mapper.Map<QuizAddDto>(quiz);
+            return quizResult;
+        }
+
+        public async Task<QuizQuestionsDto> CreateQuizQuestions(QuizQuestionsDto quizQuestionsDto)
+        {
+            var quizQuestions = _mapper.Map<QuizQuestions>(quizQuestionsDto);
+            var quiz = await _dbContext.QuizQuestions.AddAsync(quizQuestions);
+            _dbContext.SaveChanges();
+            var quizResult = _mapper.Map<QuizQuestionsDto>(quizQuestions);
+            return quizResult;
+        }
+
         public async Task<List<Quiz>> GetAllQuizzes()
         {
             var result = await _dbContext.Quizzes.ToListAsync();
