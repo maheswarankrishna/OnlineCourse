@@ -20,6 +20,9 @@ import MyCoursesScreen from "./sreens/teacher/MyCoursesScreen";
 import MyCourseScreen from "./sreens/teacher/MyCourseScreen";
 import AddCourseScreen from "./sreens/teacher/AddCourseScreen";
 import CreateUserTypeScreen from "./sreens/admin/CreateUserTypeScreen";
+import AddQuizScreen from "./sreens/teacher/AddQuizScreen";
+import AddVideoScreen from "./sreens/teacher/AddVideoScreen";
+
 
 function App() {
   return (
@@ -48,7 +51,9 @@ function App() {
         <Route exact path="/teacher/courses" render={(props) => <MyCoursesScreen {...props} />} />
         <Route exact path="/teacher/courses/:id" render={(props) => <MyCourseScreen {...props} />} />
         <Route exact path="/teacher/addcourse" render={(props) => <AddCourseScreen {...props} />} />
-
+        <Route exact path="/teacher/courses/:id/addvideo" render={(props) => <AddVideoScreen {...props} />} />
+        <Route exact path="/teacher/addquiz" component={AddQuizScreen} />
+        
         {/* Admin Paths */}
         <Route exact path="/admin/approval" render={(props) => <ApprovalScreen {...props} />} />
         <Route exact path="/admin/createusertype" render={(props) => <CreateUserTypeScreen {...props} />} />

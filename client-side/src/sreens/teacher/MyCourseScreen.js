@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 
 import Screen from "../../components/Screen";
 import VideoCard from "../../components/video/VideoCard";
@@ -38,6 +38,10 @@ class MyCourseScreen extends Component {
 
   }
 
+  addVideo(courseId){
+    this.props.history.push(`/teacher/courses/${courseId}/addvideo`);
+  }
+
   render() {
     return (
       <Screen title={this.state.name} subtitle={this.state.description}>
@@ -49,7 +53,7 @@ class MyCourseScreen extends Component {
               <h2>Videos</h2>
               <hr />
               {console.log(this.state.videos)}
-              {Array.isArray(this.state.videos)&&this.state.videos.map(({ id, fileName, videoDescription, filePath }) => (
+              {Array.isArray(this.state.videos) && this.state.videos.map(({ id, fileName, videoDescription, filePath }) => (
                 <VideoCard
                   key={id}
                   name={fileName}
@@ -57,6 +61,9 @@ class MyCourseScreen extends Component {
                   videoURL={filePath}
                 />
               ))}
+            </div>
+            <div>
+              <Button variant='primary' onClick={()=>this.addVideo(this.state.id)}>Add Video</Button>
             </div>
           </Col>
 
