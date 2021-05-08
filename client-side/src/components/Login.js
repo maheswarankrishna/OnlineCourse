@@ -26,7 +26,6 @@ class Login extends Component {
   }
 
   handleLogin = (values) => {
-    console.log(values);
     var user = { email: values.email, password: values.password };
 
     const res = LoginUser(user);
